@@ -1048,8 +1048,8 @@ function searchUser(e, search = undefined) {
         }
         enableTableClickability();
         userForbidAction();
-        userSearchIpt.select();
         userSearchIpt.focus();
+        userSearchIpt.select();
     }, data);
 }
 userSearchForm.addEventListener("submit", searchUser, false);

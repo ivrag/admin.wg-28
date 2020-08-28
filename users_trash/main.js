@@ -215,3 +215,69 @@ function banUser() {
     }, data);
 }
 banUserModalSubmitBtn.addEventListener("click", banUser, false);
+
+
+// SEARCH FOR DELETED USERS
+const delUserSearchForm = document.getElementById("del-user-search-form");
+const delUserSearchIpt = document.getElementById("del-user-search-input");
+const delUserSearchSbmtBtn = document.getElementById("del-user-search-submit-btn");
+
+function resetSearch() {
+    if (delUserSearchIpt.value.length < 1) {
+        initDelUsers();
+    }
+}
+delUserSearchIpt.addEventListener("keyup", resetSearch, false);
+
+function delUserSearchSubmit(e) {
+    e.preventDefault();
+
+    let data = {
+        str: delUserSearchIpt.value
+    };
+
+    let x = new xhr();
+    x.post("POST", "../assets/server/trash/users/search/", rsp => {
+        let re;
+        try {
+            re = JSON.parse(rsp);
+        } catch(err) {
+            warningAlert({
+                title: "Fehler",
+                message: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+            });
+            return false;
+        }
+
+        if (re.status === true) {
+            delUsersTableBody.innerHTML = "";
+            for (i in re.data) {
+                let tr = document.createElement("tr");
+    
+                tr.innerHTML = `<td>` + re.data[i].uid + `</td>
+                                <td>` + re.data[i].firstname + `</td>
+                                <td>` + re.data[i].lastname + `</td>
+                                <td>` + re.data[i].username + `</td>
+                                <td>` + re.data[i].email + `</td>
+                                <td class="text-center user-table-action-column">
+                                    <button class="btn btn-primary mr-2" onclick="regenerateUser('` + re.data[i].id + `');"><i class="fas fa-sync-alt fa-sm"></i></button>
+                                    <button class="btn btn-danger"><i class="fas fa-ban fa-sm"></i></button>
+                                </td>`;
+                
+                delUsersTableBody.appendChild(tr);
+            }
+        } else {
+            if (re.type === "nof") {
+                delUsersTableBody.innerHTML = `<tr><td colspan="6">Keine einträge gefunden ...</td></tr>`;
+            } else {
+                warningAlert({
+                    title: re.title,
+                    message: re.msg
+                });
+            }
+        }
+        delUserSearchIpt.focus();
+        delUserSearchIpt.select();
+    }, data);
+}
+delUserSearchForm.addEventListener("submit", delUserSearchSubmit, false);
