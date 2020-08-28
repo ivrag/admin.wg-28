@@ -1,0 +1,13 @@
+#wg-28-rounded-brand {
+    display: none;
+}
+
+.sidebar {
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    #wg-28-rounded-brand {
+        display: block !important;
+    }
+}

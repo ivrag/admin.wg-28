@@ -1,0 +1,7 @@
+#main-content-section {
+    display: none;
+}
+
+.user-table-action-column {
+    min-width: 124px !important;
+}

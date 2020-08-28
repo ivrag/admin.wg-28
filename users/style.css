@@ -1,0 +1,25 @@
+#main-content-section {
+  display: none;
+}
+
+.table-row-clickable {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.table-row-collapsed {
+  display: none;
+  background-color: #f7f7f7;
+}
+
+.users-subtable {
+  transition: 0.3s;
+}
+
+.users-subtable:hover {
+  background-color: #eeeeee;
+}
+
+.user-table-action-column {
+  min-width: 200px !important;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "admin.wg-28",
+  "version": "1.0.0",
+  "description": "a project to manage and update the website https://www.wohnung28.ch",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivrag/admin.wg-28.git"
+  },
+  "author": "Immobilien Von Rehetobel AG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivrag/admin.wg-28/issues"
+  },
+  "homepage": "https://github.com/ivrag/admin.wg-28#readme",
+  "dependencies": {
+    "@shoelace-style/shoelace": "^2.0.0-beta.16",
+    "bootstrap": "^4.5.2",
+    "odometer": "^0.4.8",
+    "startbootstrap-sb-admin-2": "^4.1.1"
+  }
+}
