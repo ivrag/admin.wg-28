@@ -125,6 +125,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                                 </form>
                             </div>
                             <div class="card-body">
+                                <div id="free-space-section"></div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
