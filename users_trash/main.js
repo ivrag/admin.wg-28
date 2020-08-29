@@ -46,6 +46,8 @@ function warningAlert(obj = {}) {
 const mainContentSection = document.getElementById("main-content-section");
 const delUsersTableBody = document.getElementById("del-users-table-body");
 
+const freeSpaceSection = document.getElementById("free-space-section");
+
 $(document).ready(function() {
     initDelUsers();
 });
@@ -64,6 +66,42 @@ let delTableLoadTimeout = setTimeout(() => {
         $(mainContentSection).fadeIn();
     }
 }, 300);
+
+function fetchFreeSpace() {
+    let x = new xhr();
+    x.get("POST", "../assets/server/trash/users/freespace/", rsp => {
+        let re;
+        try {
+            re = JSON.parse(rsp);
+        } catch(err) {
+            freeSpaceSection.innerHTML = "#Fehler";
+            return false;
+        }
+
+        if (re.status === true) {
+            freeSpaceSection.innerHTML = `<h4 class="small font-weight-bold">
+                                            <span title="Die Papierkorbkapazität dient dazu die
+Speicherkapazität zu schützen und Daten,
+die nicht gebraucht werden aus dem Weg
+zu räumen.">
+                                            Papierkorbkapazität</span><br><br>
+                                            <span>` + re.taken + `% verbraucht</span>
+                                            <span class="float-right">` + re.free + `% frei<span>
+                                        </h4>
+                                        <div class="progress mb-4" title="Die Papierkorbkapazität dient dazu die
+Speicherkapazität zu schützen und Daten,
+die nicht gebraucht werden aus dem Weg
+zu räumen.">
+                                        <div class="progress-bar ` + re.class + `" role="progressbar" style="width: ` + re.taken + `%" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>`;
+        } else {
+            successAlert({
+                title: re.title,
+                message: re.msg
+            });
+        }
+    });
+}
 
 function initDelUsers() {
     let x = new xhr();
@@ -96,7 +134,7 @@ function initDelUsers() {
         } else {
             delUsersTableBody.innerHTML = `<tr><td colspan="6">Es sind keine gelöschten Benutzer vorhanden...</td></tr>`;
         }
-
+        fetchFreeSpace();
         $(mainContentSection).fadeIn();
     });
 }
@@ -133,7 +171,11 @@ function regenerateUser(n) {
                         <span>Passwort : <strong>` + re.pwd + `</strong></span>
                     </sl-alert>`;
             confirmAlertSection.appendChild(div);
-            initDelUsers();
+            if (banUserModalSubmitBtn.dataset.action && banUserModalSubmitBtn.dataset.string) {
+                fetchSearchedUsers(banUserModalSubmitBtn.dataset.string);
+            } else {
+                initDelUsers();
+            }
         } else {
             warningAlert({
                 title: re.title,
@@ -182,6 +224,7 @@ function resetBanModal() {
 
 function banUser() {
     let id = parseInt(banUserModalSubmitBtn.dataset.id);
+
     let data = {
         id: id
     };
@@ -205,7 +248,11 @@ function banUser() {
                 message: "Der Benutzer wurde erfolgreich gelöscht."
             });
             resetBanModal();
-            initDelUsers();
+            if (banUserModalSubmitBtn.dataset.action && banUserModalSubmitBtn.dataset.string) {
+                fetchSearchedUsers(banUserModalSubmitBtn.dataset.string);
+            } else {
+                initDelUsers();
+            }
         } else {
             warningAlert({
                 title: "Nicht gelöscht",
@@ -215,3 +262,79 @@ function banUser() {
     }, data);
 }
 banUserModalSubmitBtn.addEventListener("click", banUser, false);
+
+
+// SEARCH FOR DELETED USERS
+const delUserSearchForm = document.getElementById("del-user-search-form");
+const delUserSearchIpt = document.getElementById("del-user-search-input");
+const delUserSearchSbmtBtn = document.getElementById("del-user-search-submit-btn");
+
+function resetSearch() {
+    if (delUserSearchIpt.value.length < 1) {
+        banUserModalSubmitBtn.dataset.action = "";
+        banUserModalSubmitBtn.dataset.string = "";
+        initDelUsers();
+    }
+}
+delUserSearchIpt.addEventListener("keyup", resetSearch, false);
+
+function fetchSearchedUsers(str) {
+    banUserModalSubmitBtn.dataset.action = "search";
+    banUserModalSubmitBtn.dataset.string = delUserSearchIpt.value;
+
+    let data = {
+        str: str
+    };
+
+    let x = new xhr();
+    x.post("POST", "../assets/server/trash/users/search/", rsp => {
+        let re;
+        try {
+            re = JSON.parse(rsp);
+        } catch(err) {
+            warningAlert({
+                title: "Fehler",
+                message: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+            });
+            return false;
+        }
+
+        if (re.status === true) {
+            delUsersTableBody.innerHTML = "";
+            for (i in re.data) {
+                let tr = document.createElement("tr");
+    
+                tr.innerHTML = `<td>` + re.data[i].uid + `</td>
+                                <td>` + re.data[i].firstname + `</td>
+                                <td>` + re.data[i].lastname + `</td>
+                                <td>` + re.data[i].username + `</td>
+                                <td>` + re.data[i].email + `</td>
+                                <td class="text-center user-table-action-column">
+                                    <button class="btn btn-primary mr-2" onclick="regenerateUser('` + re.data[i].id + `');"><i class="fas fa-sync-alt fa-sm"></i></button>
+                                    <button class="btn btn-danger" onclick="fetchBanModalValues(` + re.data[i].id + `);"><i class="fas fa-ban fa-sm"></i></button>
+                                </td>`;
+                
+                delUsersTableBody.appendChild(tr);
+            }
+            fetchFreeSpace();
+        } else {
+            if (re.type === "nof") {
+                delUsersTableBody.innerHTML = `<tr><td colspan="6">Keine einträge gefunden ...</td></tr>`;
+            } else {
+                warningAlert({
+                    title: re.title,
+                    message: re.msg
+                });
+            }
+        }
+        delUserSearchIpt.focus();
+        delUserSearchIpt.select();
+    }, data);
+}
+
+function delUserSearchSubmit(e) {
+    e.preventDefault();
+
+    fetchSearchedUsers(delUserSearchIpt.value);
+}
+delUserSearchForm.addEventListener("submit", delUserSearchSubmit, false);

@@ -117,7 +117,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                                     <div class="input-group">
                                     <input type="text" id="del-user-search-input" class="form-control" placeholder="Suchen...">
                                     <div class="input-group-append">
-                                    <button id="del-user-search-submit" class="btn btn-primary" type="submit">
+                                    <button id="del-user-search-submit-btn" class="btn btn-primary" type="submit">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                     </div>
@@ -125,6 +125,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                                 </form>
                             </div>
                             <div class="card-body">
+                                <div id="free-space-section"></div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
