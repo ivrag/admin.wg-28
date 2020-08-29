@@ -58,8 +58,8 @@ let userTableLoadTimeout = setTimeout(() => {
     if (userTableLoaded === false) {
         userTableBody.innerHTML =   `<tr role="row">
                                         <td colspan="5" class="text-center">
-                                            <div class="spinner-border text-primary" role="status">
-                                                <span class="sr-only">lädt...</span>
+                                            <div class="wg-28-loader">
+                                                <div class="wg-28-load-spinner" role="status"></div>
                                             </div>
                                         </td>
                                     </tr>`;
@@ -123,7 +123,7 @@ function pgFetchUserTable(pg, active = undefined) {
 
     let x = new xhr();
     x.post("POST", "../assets/server/fetch_user_table/", rsp => {
-        userTableLoaded = true;
+        userTableLoaded = false;
         let re;
         try {
             re = JSON.parse(rsp);
