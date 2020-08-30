@@ -15,7 +15,7 @@
     <!-- Custom -->
     <link rel="stylesheet" href="./style.css">
 
-    <title>Wohnung 28 &bull; login</title>
+    <title>login &bull; admin.wohnung28</title>
 </head>
 <body class="text-center">
     <form id="login-form" class="form-signin">

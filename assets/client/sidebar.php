@@ -7,58 +7,126 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   $dashboard_active = False;
   $users_active = False;
   $user_trash_active = False;
-
-  $track = [];
+  $addresses_active = False;
+  $terms_active = False;
+  $ip_active = False;
+  $advertisement_active = False;
+  $newsletter_active = False;
 
   if ($page === "dashboard") {
     $dashboard_active = True;
 
     $track = [
       "dashboard" => "./",
-      "address" => "#",
-      "policy" => "#",
-      "ip" => "#",
-      "advertisement" => "#",
-      "newsletter" => "#",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
       "users" => "../users/",
       "users_trash" => "../users_trash/"
     ];
-  } elseif ($page == "users") {
+  } elseif ($page === "users") {
     $users_active = True;
 
     $track = [
       "dashboard" => "../dashboard/",
-      "address" => "#",
-      "policy" => "#",
-      "ip" => "#",
-      "advertisement" => "#",
-      "newsletter" => "#",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
       "users" => "./",
       "users_trash" => "../users_trash/"
     ];
-  } elseif ($page == "profile") {
+  } elseif ($page === "profile") {
     $track = [
       "dashboard" => "../dashboard/",
-      "address" => "#",
-      "policy" => "#",
-      "ip" => "#",
-      "advertisement" => "#",
-      "newsletter" => "#",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
       "users" => "../users/",
       "users_trash" => "../users_trash/"
     ];
-  } elseif ($page == "users_trash") {
+  } elseif ($page === "users_trash") {
     $user_trash_active = True;
 
     $track = [
       "dashboard" => "../dashboard/",
-      "address" => "#",
-      "policy" => "#",
-      "ip" => "#",
-      "advertisement" => "#",
-      "newsletter" => "#",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
       "users" => "../users/",
       "users_trash" => "./"
+    ];
+  } elseif ($page === "addresses") {
+    $addresses_active = True;
+
+    $track = [
+      "dashboard" => "../dashboard/",
+      "addresses" => "./",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
+      "users" => "../users/",
+      "users_trash" => "../users_trash/"
+    ];
+  } elseif ($page === "terms") {
+    $terms_active = True;
+
+    $track = [
+      "dashboard" => "../dashboard/",
+      "addresses" => "../addresses/",
+      "terms" => "./",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
+      "users" => "../users/",
+      "users_trash" => "../users_trash/"
+    ];
+  } elseif ($page === "ip") {
+    $ip_active = True;
+
+    $track = [
+      "dashboard" => "../dashboard/",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "./",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "../newsletter/",
+      "users" => "../users/",
+      "users_trash" => "../users_trash/"
+    ];
+  } elseif ($page === "advertisement") {
+    $advertisement_active = True;
+
+    $track = [
+      "dashboard" => "../dashboard/",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "./",
+      "newsletter"  => "../newsletter/",
+      "users" => "../users/",
+      "users_trash" => "../users_trash/"
+    ];
+  } elseif ($page === "newsletter") {
+    $newsletter_active = True;
+
+    $track = [
+      "dashboard" => "../dashboard/",
+      "addresses" => "../addresses/",
+      "terms" => "../terms/",
+      "ip" => "../ip/",
+      "advertisement" => "../advertisement/",
+      "newsletter"  => "./",
+      "users" => "../users/",
+      "users_trash" => "../users_trash/"
     ];
   } else {
     header("Location: /2020/admin.wg-28/404");
@@ -112,8 +180,8 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
     </div>';
 
     if ($rights["address-rights"]) {
-      echo '<li class="nav-item">
-      <a class="nav-link" href="' . $track["address"] . '">
+      echo '<li class="nav-item ' . ($addresses_active ? "active" : "") . '">
+      <a class="nav-link" href="' . $track["addresses"] . '">
       <i class="fas fa-map-marked-alt"></i>
         <span>Adressen</span></a>
       </li>';
@@ -122,8 +190,8 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
     <?php
     if ($rights["policy-rights"]) {
-      echo '<li class="nav-item">
-      <a class="nav-link" href="' . $track["policy"] . '">
+      echo '<li class="nav-item ' . ($terms_active ? "active" : "") . '">
+      <a class="nav-link" href="' . $track["terms"] . '">
       <i class="fas fa-handshake"></i>
         <span>Richtlinien</span></a>
       </li>';
@@ -133,7 +201,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
     <?php
     if ($rights["ip-rights"]) {
-      echo '<li class="nav-item">
+      echo '<li class="nav-item ' . ($ip_active ? "active" : "") . '">
       <a class="nav-link" href="' . $track["ip"] . '">
       <i class="fas fa-server"></i>
         <span>IP-Freigabe</span></a>
@@ -151,7 +219,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       Inserate
     </div>
   
-    <li class="nav-item">
+    <li class="nav-item ' . ($advertisement_active ? "active" : "") . '">
       <a class="nav-link" href="' . $track["advertisement"] . '">
       <i class="fas fa-file-code"></i>
         <span>Inserate</span></a>
@@ -170,7 +238,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
     </div>
   
     <!-- Nav Item - Newsletter -->
-    <li class="nav-item">
+    <li class="nav-item ' . ($newsletter_active ? "active" : "") . '">
         <a class="nav-link" href="' . $track["newsletter"] . '">
         <i class="fas fa-paper-plane"></i>
         <span>Newsletter</span></a>

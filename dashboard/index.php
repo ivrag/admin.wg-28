@@ -18,7 +18,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- favicon -->
   <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
 
-  <title>admin.wohnung28 &bull; Übersicht</title>
+  <title>Übersicht &bull; admin.wohnung28</title>
 
   <!-- Custom fonts for this template-->
   <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
