@@ -1,3 +1,10 @@
+function initPopovers() {
+    // initialize popovers
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+}
+
 const mainSuccessAlert = document.getElementById("main-success-alert");
 const mainWarningAlert = document.getElementById("main-warning-alert");
 const confirmAlertSection = document.getElementById("confirm-alert-section");
@@ -79,21 +86,10 @@ function fetchFreeSpace() {
         }
 
         if (re.status === true) {
-            freeSpaceSection.innerHTML = `<h4 class="small font-weight-bold">
-                                            <span title="Die Papierkorbkapazität dient dazu die
-Speicherkapazität zu schützen und Daten,
-die nicht gebraucht werden aus dem Weg
-zu räumen.">
-                                            Papierkorbkapazität</span><br><br>
-                                            <span>` + re.taken + `% verbraucht</span>
-                                            <span class="float-right">` + re.free + `% frei<span>
-                                        </h4>
-                                        <div class="progress mb-4" title="Die Papierkorbkapazität dient dazu die
-Speicherkapazität zu schützen und Daten,
-die nicht gebraucht werden aus dem Weg
-zu räumen.">
-                                        <div class="progress-bar ` + re.class + `" role="progressbar" style="width: ` + re.taken + `%" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>`;
+            let styleElement = document.getElementById("popover-styles");
+            styleElement.textContent = `.ppwdt {width: ` + re.taken + `%;}`;
+            freeSpaceSection.innerHTML = `<button type="button" data-trigger="focus" class="btn btn-info btn-sm" data-toggle="popover" data-html="true" title="Papierkorbkapazität" data-content="Die Papierkorbkapazität dient dazu die Speicherkapazität zu schützen und Daten, die nicht gebraucht werden aus dem Weg zu räumen.<br><br><div><small>` + re.taken + `% belegt</small></div><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated ` + re.class + ` ppwdt' role='progressbar' aria-valuenow=’20’ aria-valuemin='0' aria-valuemax='100'></div></div><div></div>">Papierkorbkapazität</button>`;
+            initPopovers();
         } else {
             successAlert({
                 title: re.title,

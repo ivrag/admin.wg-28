@@ -43,6 +43,8 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Custom -->
   <link rel="stylesheet" href="./style.css">
 
+  <style id="popover-styles"></style>
+
 </head>
 
 <body id="page-top">
@@ -113,6 +115,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Gelöschte Benutzer</h6>
+                                <div id="free-space-section"><button class="btn btn-info btn-sm" disabled>Papierkorbkapazität</div>
                                 <form id="del-user-search-form">
                                     <div class="input-group">
                                     <input type="text" id="del-user-search-input" class="form-control" placeholder="Suchen...">
@@ -125,7 +128,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                                 </form>
                             </div>
                             <div class="card-body">
-                                <div id="free-space-section"></div>
                                 <div class="table-responsive">
                                     <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
@@ -196,6 +198,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
   <!-- Bootstrap core JavaScript-->
   <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
+  <script type="module" src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
   <script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
