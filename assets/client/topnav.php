@@ -3,25 +3,8 @@
 
 if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
-  if ($page == "dashboard") {
-    $profile_path = "../profile/";
-    $logoff_path = "../logoff/";
-  }
-
-  if ($page == "users") {
-    $profile_path = "../profile/";
-    $logoff_path = "../logoff/";
-  }
-
-  if ($page == "profile") {
-    $profile_path = "./";
-    $logoff_path = "../logoff/";
-  }
-
-  if ($page == "users_trash") {
-    $profile_path = "../profile/";
-    $logoff_path = "../logoff/";
-  }
+  $profile_path = "../profile/";
+  $logoff_path = "../logoff/";
 ?>
 
 <!-- Topbar Navbar -->
