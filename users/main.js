@@ -1,24 +1,37 @@
 // MAIN USER alerts
-const mainSuccessAlert = document.getElementById("main-success-alert");
 const mainWarningAlert = document.getElementById("main-warning-alert");
+const alertSection = document.getElementById("alert-section");
 function successAlert(obj = {}) {
     let title = obj.title ?? "Title";
     let message = obj.message ?? "Your message goes here";
     let timeout = obj.timeout ?? 5000;
 
-    let titleOut = document.getElementById("main-success-alert-title");
-    let msgOut = document.getElementById("main-success-alert-message");
+    let slAlert = document.createElement("sl-alert");
+    slAlert.setAttribute("type", "success");
+    slAlert.setAttribute("class", "mb-4");
 
-    titleOut.textContent = title;
-    msgOut.textContent = message;
+    let slIcon = document.createElement("sl-icon");
+    slIcon.setAttribute("slot", "icon");
+    slIcon.setAttribute("name", "check2-circle");
+    
+    let titleSection = document.createElement("div");
+    let strong = document.createElement("strong");
+    strong.textContent = title;
+    titleSection.appendChild(strong);
 
-    mainSuccessAlert.show();
-    let hideTimeout = setTimeout(function() {
-        mainSuccessAlert.hide(function() {
-            titleOut.textContent = "";
-            msgOut.textContent = "";
-        });
-        clearTimeout(hideTimeout);
+    let msg = document.createElement("span");
+    msg.textContent = message;
+
+    slAlert.appendChild(slIcon);
+    slAlert.appendChild(titleSection);
+    slAlert.appendChild(msg);
+
+    alertSection.appendChild(slAlert);
+
+    slAlert.show();
+    let showTimeout = setTimeout(function () {
+        slAlert.hide();
+        clearTimeout(showTimeout);
     }, timeout);
 }
 
@@ -27,19 +40,32 @@ function warningAlert(obj = {}) {
     let message = obj.message ?? "Your message goes here";
     let timeout = obj.timeout ?? 5000;
 
-    let titleOut = document.getElementById("main-warning-alert-title");
-    let msgOut = document.getElementById("main-warning-alert-message");
+    let slAlert = document.createElement("sl-alert");
+    slAlert.setAttribute("type", "warning");
+    slAlert.setAttributeNode("class", "mb-4");
 
-    titleOut.textContent = title;
-    msgOut.textContent = message;
+    let slIcon = document.createElement("sl-icon");
+    slIcon.setAttribute("slot", "icon");
+    slIcon.setAttribute("name", "exclamation-triangle");
 
-    mainWarningAlert.show();
-    let hideTimeout = setTimeout(function () {
-        mainWarningAlert.hide(function() {
-            titleOut.textContent = "";
-            msgOut.textContent = "";
-        });
-        clearTimeout(hideTimeout);
+    let titleSection = document.createElement("div");
+    let strong = document.createElement("strong");
+    strong.textContent = title;
+    titleSection.appendChild(strong);
+
+    let msg = document.createElement("span");
+    msg.textContent = message;
+
+    slAlert.appendChild(slIcon);
+    slAlert.appendChild(titleSection);
+    slAlert.appendChild(msg);
+
+    alertSection.appendChild(slAlert);
+
+    slAlert.show();
+    let showTimeout = setTimeout(function() {
+        slAlert.hide();
+        clearTimeout(showTimeout);
     }, timeout);
 }
 
@@ -310,6 +336,7 @@ function pgFetchUserTable(pg, active = undefined) {
 
                 let h5_right = document.createElement("h5");
                 h5_right.setAttribute("class", "mt-2");
+                h5_right.textContent = "Rechte";
 
                 let hr_right = document.createElement("hr");
 
