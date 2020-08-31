@@ -26,7 +26,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- favicon -->
   <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
 
-  <title>admin.wohnung28 &bull; Benutzer</title>
+  <title>Benutzer &bull; admin.wohnung28</title>
 
   <!-- Custom fonts for this template-->
   <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -383,7 +383,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
             <div class="modal-footer">
               <button id="update-user-rights-submit-btn" type="submit" class="btn btn-primary mt-3" disabled><i class="far fa-save mr-2"></i> Rechte speichern</button>
             </div>
-            <input type="hidden" class="ipt-user-forbid-action" disabled>
           </form>
         </div>
       </div>
@@ -406,7 +405,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
         </div>
       </div>
     </div>
-    <input type="hidden" class="ipt-user-forbid-action" disabled>
   </div>
 
   <!-- DELETE USER MODAL -->
@@ -425,7 +423,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
         </div>
       </div>
     </div>
-    <input type="hidden" class="ipt-user-forbid-action" disabled>
   </div>
 
   <!-- Shoelace -->

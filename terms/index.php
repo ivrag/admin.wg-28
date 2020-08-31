@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
-  $page = "users_trash";
+  $page = "terms";
 
   require_once dirname(__FILE__) . "/../config.php";
 
@@ -10,7 +10,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   $db = new DataController($_AdminUsers);
   $data = $db->selectId(intval($_SESSION["wg28-user"]["id"]));
 
-  if (intval($data["user_rights"]) === 1) {
+  if (intval($data["policy_rights"]) === 1) {
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- favicon -->
   <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
 
-  <title>Gelöschte Benutzer &bull; admin.wohnung28</title>
+  <title>Richtlinien &bull; admin.wohnung28</title>
 
   <!-- Custom fonts for this template-->
   <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,13 +41,12 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <link rel="stylesheet" href="../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
   <!-- Custom -->
-  <link rel="stylesheet" href="./style.css">
-
-  <style id="popover-styles"></style>
+  <!--<link rel="stylesheet" href="./style.css">-->
 
 </head>
 
 <body id="page-top">
+  <input id="main-page-input" type="hidden" value="1">
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -82,7 +81,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
           </button>
 
           <div class="mt-2 ml-0">
-            <h1 class="h3 text-gray-800">Benutzer</h1>
+            <h1 class="h3 text-gray-800">Richtlinien</h1>
           </div>
 
           <?php require_once ROOT."assets/client/topnav.php" ?>
@@ -96,57 +95,29 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
           <!-- Content Row -->
           <div class="row">
 
-                    <!-- Content Column -->
-                    <div class="col-lg-12 mb-4">
-                        <div id="confirm-alert-section"></div>
-                        <sl-alert id="main-success-alert" type="success" class="mb-4">
-                            <sl-icon slot="icon" name="check2-circle"></sl-icon>
-                            <strong id="main-success-alert-title"></strong><br>
-                            <span id="main-success-alert-message"></span>
-                        </sl-alert>
-                        <sl-alert id="main-warning-alert" type="warning" class="mb-4">
-                            <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
-                            <strong id="main-warning-alert-title"></strong><br>
-                            <span id="main-warning-alert-message"></span>
-                        </sl-alert>
-
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Gelöschte Benutzer</h6>
-                                <div id="free-space-section"><button class="btn btn-info btn-sm" disabled>Papierkorbkapazität</div>
-                                <form id="del-user-search-form">
-                                    <div class="input-group">
-                                    <input type="text" id="del-user-search-input" class="form-control" placeholder="Suchen...">
-                                    <div class="input-group-append">
-                                    <button id="del-user-search-submit-btn" class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                    </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-body">
-                                <div id="free-space-section"></div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr role="row">
-                                            <th>Identitäts-Nr.</th>
-                                            <th>Vorname</th>
-                                            <th>Nachname</th>
-                                            <th>Benutzername</th>
-                                            <th>E-Mail</th>
-                                            <th>Aktionen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="del-users-table-body"></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Content Column -->
+            <div class="col-lg-12 mb-4">
+              <sl-alert id="main-success-alert" type="success" class="mb-4">
+                <sl-icon slot="icon" name="check2-circle"></sl-icon>
+                <strong id="main-success-alert-title"></strong><br>
+                <span id="main-success-alert-message"></span>
+              </sl-alert>
+              <sl-alert id="main-warning-alert" type="warning" class="mb-4">
+                <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+                <strong id="main-warning-alert-title"></strong><br>
+                <span id="main-warning-alert-message"></span>
+              </sl-alert>
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Richtlinien</h6>
+                </div>
+                <div class="card-body">
+                  <!-- Card Body -->
+                </div>
+              </div>
             </div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -171,33 +142,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- BAN USER MODAL -->
-  <div class="modal fade" id="ban-user-modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Endgültig löschen?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-          <p id="ban-user-message"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-          <button id="ban-user-submit-btn" type="button" class="btn btn-danger" data-dismiss="modal">Für immer löschen</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Shoelace -->
   <script type="module" src="../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.esm.js"></script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
-  <script type="module" src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
   <script src="../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -213,7 +162,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <script type="text/javascript" src="../assets/js/xhr/xhr.min.js"></script>
 
   <!-- Custom -->
-  <script type="text/javascript" src="./main.js"></script>
+  <!--<script type="text/javascript" src="./main.js"></script>-->
 
 </body>
 
