@@ -99,16 +99,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                     <!-- Content Column -->
                     <div class="col-lg-12 mb-4">
                         <div id="confirm-alert-section"></div>
-                        <sl-alert id="main-success-alert" type="success" class="mb-4">
-                            <sl-icon slot="icon" name="check2-circle"></sl-icon>
-                            <strong id="main-success-alert-title"></strong><br>
-                            <span id="main-success-alert-message"></span>
-                        </sl-alert>
-                        <sl-alert id="main-warning-alert" type="warning" class="mb-4">
-                            <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
-                            <strong id="main-warning-alert-title"></strong><br>
-                            <span id="main-warning-alert-message"></span>
-                        </sl-alert>
 
                         <!-- Project Card Example -->
                         <div class="card shadow mb-4">
@@ -191,6 +181,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       </div>
     </div>
   </div>
+
+  <!-- ALERTS -->
+  <div id="alert-section"></div>
 
   <!-- Shoelace -->
   <script type="module" src="../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.esm.js"></script>

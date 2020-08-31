@@ -23,3 +23,13 @@
 .user-table-action-column {
   min-width: 200px !important;
 }
+
+#alert-section {
+  position: fixed !important;
+  left: 50px;
+  bottom: 30px;
+  opacity: 0.97;
+  width: 450px;
+  min-width: 300px;
+  z-index: 1060;
+}
