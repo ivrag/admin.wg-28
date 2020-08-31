@@ -48,7 +48,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 </head>
 
 <body id="page-top">
-  <input id="main-page-input" type="hidden" value="1">
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -190,7 +189,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
         </div>
       </div>
     </div>
-    <input type="hidden" class="ipt-user-forbid-action" disabled>
   </div>
 
   <!-- Shoelace -->

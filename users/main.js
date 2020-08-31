@@ -460,7 +460,6 @@ function pgFetchUserTable(pg, active = undefined) {
             }
 
             enableTableClickability();
-            userForbidAction();
         } else {
             userTableBody.innerHTML = '<tr><td colspan="5">Es sind keine Benutzer vorhanden...</td></tr>';
         }
@@ -1297,22 +1296,8 @@ function searchUser(e, search = undefined) {
             }
         }
         enableTableClickability();
-        userForbidAction();
         userSearchIpt.focus();
         userSearchIpt.select();
     }, data);
 }
 userSearchForm.addEventListener("submit", searchUser, false);
-
-
-
-
-// FORBIDDEN
-function userForbidAction() {
-    $(".ipt-user-forbid-action").each(function() {
-        $(this).focus(function() {
-            window.location.replace("../logoff/");
-        });
-    });
-}
-userForbidAction();

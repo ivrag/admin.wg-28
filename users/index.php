@@ -405,7 +405,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
         </div>
       </div>
     </div>
-    <input type="hidden" class="ipt-user-forbid-action" disabled>
   </div>
 
   <!-- DELETE USER MODAL -->
@@ -424,7 +423,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
         </div>
       </div>
     </div>
-    <input type="hidden" class="ipt-user-forbid-action" disabled>
   </div>
 
   <!-- Shoelace -->
