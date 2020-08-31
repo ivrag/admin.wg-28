@@ -267,7 +267,6 @@ function regenerateUser(n) {
 
             div.appendChild(slAlert);
             confirmAlertSection.appendChild(div);
-
             if (banUserModalSubmitBtn.dataset.action && banUserModalSubmitBtn.dataset.string) {
                 fetchSearchedUsers(banUserModalSubmitBtn.dataset.string);
             } else {
@@ -420,7 +419,7 @@ function fetchSearchedUsers(str) {
             delUsersTableBody.innerHTML = "";
             for (i in re.data) {
                 let tr = document.createElement("tr");
-    
+
                 let tdUid = document.createElement("td");
                 tdUid.textContent = re.data[i].uid;
                 tr.appendChild(tdUid);
