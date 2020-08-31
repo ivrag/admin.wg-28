@@ -1,5 +1,5 @@
+// initialize popovers
 function initPopovers() {
-    // initialize popovers
     $(function () {
         $('[data-toggle="popover"]').popover()
     });
@@ -114,16 +114,57 @@ function initDelUsers() {
         if (re.status === undefined) {
             for (i in re) {
                 let tr = document.createElement("tr");
-    
-                tr.innerHTML = `<td>` + re[i].uid + `</td>
-                                <td>` + re[i].firstname + `</td>
-                                <td>` + re[i].lastname + `</td>
-                                <td>` + re[i].username + `</td>
-                                <td>` + re[i].email + `</td>
-                                <td class="text-center user-table-action-column">
-                                    <button class="btn btn-primary mr-2" onclick="regenerateUser('` + re[i].id + `');"><i class="fas fa-sync-alt fa-sm"></i></button>
-                                    <button class="btn btn-danger" onclick="fetchBanModalValues('` + re[i].id + `');"><i class="fas fa-ban fa-sm"></i></button>
-                                </td>`;
+
+                let tdUid = document.createElement("td");
+                tdUid.textContent = re[i].uid;
+                tr.appendChild(tdUid);
+
+                let tdFn = document.createElement("td");
+                tdFn.textContent = re[i].firstname;
+                tr.appendChild(tdFn);
+
+                let tdLn = document.createElement("td");
+                tdLn.textContent = re[i].lastname;
+                tr.appendChild(tdLn);
+
+                let tdUn = document.createElement("td");
+                tdUn.textContent = re[i].username;
+                tr.appendChild(tdUn);
+
+                let tdMail = document.createElement("td");
+                tdMail.textContent = re[i].email;
+                tr.appendChild(tdMail);
+
+                let tdActions = document.createElement("td");
+                tdActions.setAttribute("class", "text-center user-table-action-column");
+
+                let regenBtn = document.createElement("button");
+                regenBtn.setAttribute("class", "btn btn-primary mr-2");
+
+                let regenIcon = document.createElement("i");
+                regenIcon.setAttribute("class", "fas fa-sync-alt fa-sm");
+                regenBtn.appendChild(regenIcon);
+
+                let banBtn = document.createElement("button");
+                banBtn.setAttribute("class", "btn btn-danger");
+
+                let banIcon = document.createElement("i");
+                banIcon.setAttribute("class", "fas fa-ban fa-sm");
+                banBtn.appendChild(banIcon);
+
+                tdActions.appendChild(regenBtn);
+                tdActions.appendChild(banBtn);
+                tr.appendChild(tdActions);
+
+                let id = re[i].id;
+
+                regenBtn.addEventListener("click", function() {
+                    regenerateUser(id);
+                }, false);
+
+                banBtn.addEventListener("click", function() {
+                    fetchBanModalValues(id);
+                }, false);
                 
                 delUsersTableBody.appendChild(tr);
             }
@@ -157,16 +198,76 @@ function regenerateUser(n) {
 
         if (re.status === true) {
             let div = document.createElement("div");
-            div.innerHTML = `<sl-alert open type="primary" closable class="alert-closable mb-4">
-                        <sl-icon slot="icon" name="info-circle"></sl-icon>
-                        <strong>Benutzer wiederhergestellt</strong><br>
-                        <span>Der Benutzer <strong>` + re.firstname + ` ` + re.lastname + `</strong> wurde wiederhergestellt.</span><br><br>
-                        <span>Bitte beachten Sie, dass dem Benutzer ein neues Passwort zugewiesen wurde, sowie alle Benutzerrechte gesperrt wurden.</span><br>
-                        <span>Um die Rechte zu ändern, begeben Sie sich in die <a href="../users/">Benutzerrubrik</a> und suchen Sie nach dem Benutzer. Klicken Sie auf Benutzer Bearbeiten.</span><br><br>
-                        <span>Benutzername: <strong>` + re.username + `</strong></span><br>
-                        <span>Passwort : <strong>` + re.pwd + `</strong></span>
-                    </sl-alert>`;
+
+            let slAlert = document.createElement("sl-alert");
+            slAlert.setAttributeNode(document.createAttribute("open"));
+            slAlert.setAttributeNode(document.createAttribute("closable"));
+            slAlert.setAttribute("type", "primary");
+            slAlert.setAttribute("class", "alert-closable mb-4");
+
+            slIcon = document.createElement("sl-icon");
+            slIcon.setAttribute("slot", "icon");
+            slIcon.setAttribute("name", "info-circle");
+            slAlert.appendChild(slIcon);
+
+            alertTitle = document.createElement("strong");
+            alertTitle.textContent = "Benutzer wiederhergestellt";
+            slAlert.appendChild(alertTitle);
+
+            let br = document.createElement("br");
+
+            slAlert.appendChild(br);
+
+            let msgSpan = document.createElement("span");
+            let msgSubSpan = document.createElement("span");
+            msgSpan.textContent = "Der Benutzer ";
+            msgSpan.appendChild(msgSubSpan);
+
+            let msgStrong = document.createElement("strong");
+            msgStrong.textContent = re.firstname + " " + re.lastname;
+            msgSpan.appendChild(msgStrong);
+
+            let msgSubSpan2 = document.createElement("span");
+            msgSubSpan2.textContent = " wurde wiederhergestellt.";
+            msgSpan.appendChild(msgSubSpan2);
+
+            slAlert.appendChild(msgSpan);
+
+            let br2 = document.createElement("br");
+            slAlert.appendChild(br2);
+            let br3 = document.createElement("br");
+            slAlert.appendChild(br3);
+
+            let cautionSpan = document.createElement("span");
+            cautionSpan.innerHTML = `<span>Bitte beachten Sie, dass dem Benutzer ein neues Passwort zugewiesen wurde, sowie alle Benutzerrechte gesperrt wurden.</span><br>
+                                    <span>Um die Rechte zu ändern, begeben Sie sich in die <a href="../users/">Benutzerrubrik</a> und suchen Sie nach dem Benutzer. Klicken Sie auf Benutzer Bearbeiten.</span><br><br>`;
+            
+            slAlert.appendChild(cautionSpan);
+
+            let usernameDiv = document.createElement("div");
+            let unLabelSpan = document.createElement("span");
+            unLabelSpan.textContent = "Benutzername: ";
+            usernameDiv.appendChild(unLabelSpan);
+
+            let unValue = document.createElement("strong");
+            unValue.textContent = re.username;
+            usernameDiv.appendChild(unValue);
+
+            let pwdDiv = document.createElement("div");
+            let pwdLabelSpan = document.createElement("span");
+            pwdLabelSpan.textContent = "Passwort: ";
+            pwdDiv.appendChild(pwdLabelSpan);
+
+            let pwdValue = document.createElement("strong");
+            pwdValue.textContent = re.pwd;
+            pwdDiv.appendChild(pwdValue);
+
+            slAlert.appendChild(usernameDiv);
+            slAlert.appendChild(pwdDiv);
+
+            div.appendChild(slAlert);
             confirmAlertSection.appendChild(div);
+
             if (banUserModalSubmitBtn.dataset.action && banUserModalSubmitBtn.dataset.string) {
                 fetchSearchedUsers(banUserModalSubmitBtn.dataset.string);
             } else {
@@ -205,8 +306,28 @@ function fetchBanModalValues(n) {
         }
 
         if (re.status === true) {
-            banUserModalMessage.innerHTML = `Soll <strong>` + re.firstname + ` ` + re.lastname + `</strong> wirklich für immer gelöscht werden?<br><br>
-                                            Diese Aktion kann <strong><span class="text-danger">NICHT RÜCKGÄNGIG</span></strong> gemacht werden !`;
+            banUserModalMessage.innerHTML = "";
+            let msgDiv = document.createElement("div");
+            let msgSpan = document.createElement("span");
+            msgSpan.textContent = "Soll ";
+            msgDiv.appendChild(msgSpan);
+            let strong = document.createElement("strong");
+            strong.textContent = re.firstname + " " + re.lastname;
+            msgDiv.appendChild(strong);
+            let msgSpan2 = document.createElement("span");
+            msgSpan2.textContent = " wirklich für immer gelöscht werden?";
+            msgDiv.appendChild(msgSpan2);
+
+            banUserModalMessage.appendChild(msgDiv);
+
+            let brDiv = document.createElement("div");
+            brDiv.innerHTML = "<br>";
+            msgDiv.appendChild(brDiv);
+
+            let cautionDiv = document.createElement("div");
+            cautionDiv.innerHTML = `Diese Aktion kann <strong><span class="text-danger">NICHT RÜCKGÄNGIG</span></strong> gemacht werden !`;
+            msgDiv.appendChild(cautionDiv);
+
             banUserModalSubmitBtn.dataset.id = id;
             $(banUserModal).modal("show");
         }
@@ -300,15 +421,56 @@ function fetchSearchedUsers(str) {
             for (i in re.data) {
                 let tr = document.createElement("tr");
     
-                tr.innerHTML = `<td>` + re.data[i].uid + `</td>
-                                <td>` + re.data[i].firstname + `</td>
-                                <td>` + re.data[i].lastname + `</td>
-                                <td>` + re.data[i].username + `</td>
-                                <td>` + re.data[i].email + `</td>
-                                <td class="text-center user-table-action-column">
-                                    <button class="btn btn-primary mr-2" onclick="regenerateUser('` + re.data[i].id + `');"><i class="fas fa-sync-alt fa-sm"></i></button>
-                                    <button class="btn btn-danger" onclick="fetchBanModalValues(` + re.data[i].id + `);"><i class="fas fa-ban fa-sm"></i></button>
-                                </td>`;
+                let tdUid = document.createElement("td");
+                tdUid.textContent = re.data[i].uid;
+                tr.appendChild(tdUid);
+
+                let tdFn = document.createElement("td");
+                tdFn.textContent = re.data[i].firstname;
+                tr.appendChild(tdFn);
+
+                let tdLn = document.createElement("td");
+                tdLn.textContent = re.data[i].lastname;
+                tr.appendChild(tdLn);
+
+                let tdUn = document.createElement("td");
+                tdUn.textContent = re.data[i].username;
+                tr.appendChild(tdUn);
+
+                let tdMail = document.createElement("td");
+                tdMail.textContent = re.data[i].email;
+                tr.appendChild(tdMail);
+
+                let tdActions = document.createElement("td");
+                tdActions.setAttribute("class", "text-center user-table-action-column");
+
+                let regenBtn = document.createElement("button");
+                regenBtn.setAttribute("class", "btn btn-primary mr-2");
+
+                let regenIcon = document.createElement("i");
+                regenIcon.setAttribute("class", "fas fa-sync-alt fa-sm");
+                regenBtn.appendChild(regenIcon);
+
+                let banBtn = document.createElement("button");
+                banBtn.setAttribute("class", "btn btn-danger");
+
+                let banIcon = document.createElement("i");
+                banIcon.setAttribute("class", "fas fa-ban fa-sm");
+                banBtn.appendChild(banIcon);
+
+                tdActions.appendChild(regenBtn);
+                tdActions.appendChild(banBtn);
+                tr.appendChild(tdActions);
+
+                let id = re.data[i].id;
+
+                regenBtn.addEventListener("click", function() {
+                    regenerateUser(id);
+                }, false);
+
+                banBtn.addEventListener("click", function() {
+                    fetchBanModalValues(id);
+                }, false);
                 
                 delUsersTableBody.appendChild(tr);
             }
