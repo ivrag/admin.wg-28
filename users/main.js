@@ -46,6 +46,7 @@ function warningAlert(obj = {}) {
 
 let userTableLoaded = false;
 let _page = document.getElementById("main-page-input");
+let _current = false;
 let dataSets = false;
 
 const datasetSelect = document.getElementById("dataset-select");
@@ -56,13 +57,26 @@ const userTableFooter = document.getElementById("user-table-footer");
 
 let userTableLoadTimeout = setTimeout(() => {
     if (userTableLoaded === false) {
-        userTableBody.innerHTML =   `<tr role="row">
-                                        <td colspan="5" class="text-center">
-                                            <div class="spinner-border text-primary" role="status">
-                                                <span class="sr-only">lädt...</span>
-                                            </div>
-                                        </td>
-                                    </tr>`;
+        let tr = document.createElement("tr");
+        tr.setAttribute("role", "row");
+
+        let td = document.createElement("td");
+        td.setAttribute("colspan", 5);
+        td.setAttribute("class", "text-center");
+
+        let div = document.createElement("div");
+        div.setAttribute("class", "spinner-border text-primary");
+        div.setAttribute("role", "status");
+
+        let span = document.createElement("span");
+        span.setAttribute("class", "sr-only");
+        span.textContent = "lädt...";
+
+        tr.appendChild(td);
+        td.appendChild(div);
+        div.appendChild(span);
+
+        userTableBody.appendChild(tr);
         $(mainContentSection).fadeIn();
     }
 }, 300);
@@ -139,17 +153,72 @@ function pgFetchUserTable(pg, active = undefined) {
                 let trClickable = document.createElement("tr");
                 trClickable.setAttribute("role", "row");
                 (active === parseInt(re.data[x].id)) ? trClickable.setAttribute("class", "table-row-clickable open") : trClickable.setAttribute("class", "table-row-clickable");
-                // NOTICE: Changing the last <td> element in this section will cause fatal errors !
-                trClickable.innerHTML = `<td>` + re.data[x].firstname + `</td>
-                                        <td>` + re.data[x].lastname + `</td>
-                                        <td>` + re.data[x].username + `</td>
-                                        <td>` + re.data[x].email + `</td>
-                                        <td class="text-center user-table-action-column">
-                                            <button title="Rechte bearbeiten" class="btn btn-primary btn-sm mr-3" onclick="userFetchUpdateValues(event, this)"><i class="fas fa-user-cog"></i></button>
-                                            <button title="Benutzer blockieren" class="btn btn-warning btn-sm mr-3" onclick="fetchUserBlockValues(event, this)"><i class="fas fa-user-slash"></i></button>
-                                            <button title="Benutzer löschen" class="btn btn-danger btn-sm" onclick="fetchUserDeleteValues(event, this)"><i class="fas fa-trash-alt"></i></button>
-                                            <input type="hidden" value="` + re.data[x].id + `" class="ipt-user-forbid-action" disabled>
-                                        </td>`;
+                // NOTICE: Changing the last <td> element in this section can cause fatal errors !
+                let fntd = document.createElement("td");
+                fntd.textContent = re.data[x].firstname;
+
+                let lntd = document.createElement("td");
+                lntd.textContent = re.data[x].lastname;
+
+                let untd = document.createElement("td");
+                untd.textContent = re.data[x].username;
+
+                let emtd = document.createElement("td");
+                emtd.textContent = re.data[x].email;
+
+                let actiontd = document.createElement("td");
+                actiontd.setAttribute("class", "text-center user-table-action-column");
+
+                let updateBtn = document.createElement("button");
+                updateBtn.setAttribute("title", "Rechte bearbeiten");
+                updateBtn.setAttribute("class", "btn btn-primary btn-sm mr-3");
+
+                let updateIcon = document.createElement("i");
+                updateIcon.setAttribute("class", "fas fa-user-cog");
+                updateBtn.appendChild(updateIcon);
+
+                let blockBtn = document.createElement("button");
+                blockBtn.setAttribute("title", "Benutzer blockieren");
+                blockBtn.setAttribute("class", "btn btn-warning btn-sm mr-3");
+
+                let blockIcon = document.createElement("i");
+                blockIcon.setAttribute("class", "fas fa-user-slash");
+                blockBtn.appendChild(blockIcon);
+
+                let delBtn = document.createElement("button");
+                delBtn.setAttribute("title", "Benutzer löschen");
+                delBtn.setAttribute("class", "btn btn-danger btn-sm");
+
+                let delIcon = document.createElement("i");
+                delIcon.setAttribute("class", "fas fa-trash-alt");
+                delBtn.appendChild(delIcon);
+
+                trClickable.appendChild(fntd);
+                trClickable.appendChild(lntd);
+                trClickable.appendChild(untd);
+                trClickable.appendChild(emtd);
+                trClickable.appendChild(actiontd);
+
+                actiontd.appendChild(updateBtn);
+                actiontd.appendChild(blockBtn);
+                actiontd.appendChild(delBtn);
+
+                let id = re.data[x].id;
+
+                updateBtn.addEventListener("click", function(e) {
+                    userFetchUpdateValues(e, id);
+                    _current = id;
+                }, false);
+
+                blockBtn.addEventListener("click", function(e) {
+                    fetchUserBlockValues(e, id);
+                    _current = id;
+                }, false);
+
+                delBtn.addEventListener("click", function(e) {
+                    fetchUserDeleteValues(e, id);
+                    _current = id;
+                }, false);
                 
                 // assign right icons
                 let userRights, adRights, addressRights, policyRights, ipRights, newsletterRights;
@@ -165,60 +234,137 @@ function pgFetchUserTable(pg, active = undefined) {
                 let trCollapsed = document.createElement("tr");
                 trCollapsed.setAttribute("class", "table-row-collapsed");
                 if (active === parseInt(re.data[x].id)) { trCollapsed.setAttribute("style", "display: table-row;") };
-                trCollapsed.innerHTML = `<td colspan="3">
-                                            <h5 class="mt-2">` + re.data[x].firstname + ` ` + re.data[x].lastname + `</h5>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Vorname</div>
-                                                    <div class="text-dark">` + re.data[x].firstname + `</div>
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Nachname</div>
-                                                    <div class="text-dark">` + re.data[x].lastname + `</div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Benutzername</div>
-                                                    <div class="text-dark">` + re.data[x].username + `</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div>E-Mail</div>
-                                                    <div class="text-dark">` + re.data[x].email + `</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td colspan="2">
-                                            <h5 class="mt-2">Rechte</h5>
-                                            <hr>
-                                            <table class="table table-borderless">
-                                                <tr class="users-subtable">
-                                                    <td>Benutzer</td>
-                                                    <td>` + userRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Inserate</td>
-                                                    <td>` + adRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Adressen</td>
-                                                    <td>` + addressRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Richtlinien</td>
-                                                    <td>` + policyRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>IP-Adresse</td>
-                                                    <td>` + ipRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Newsletter</td>
-                                                    <td>` + newsletterRights + `</td>
-                                                </tr>
-                                            </table>
-                                        </td>`;
+
+                let subtd_left = document.createElement("td");
+                subtd_left.setAttribute("colspan", 3);
+
+                let h5_left = document.createElement("h5");
+                h5_left.setAttribute("class", "mt-2");
+                h5_left.textContent = re.data[x].firstname + " " + re.data[x].lastname;
+
+                let hr_left = document.createElement("hr");
+
+                let nameDiv = document.createElement("div");
+                nameDiv.setAttribute("class", "row");
+
+                let firstnameDiv = document.createElement("div");
+                firstnameDiv.setAttribute("class", "col-md-6 mb-4");
+                nameDiv.appendChild(firstnameDiv);
+
+                let firstnameLabelDiv = document.createElement("div");
+                firstnameLabelDiv.textContent = "Vorname";
+                firstnameDiv.appendChild(firstnameLabelDiv);
+
+                let firstnameValueDiv = document.createElement("div");
+                firstnameValueDiv.setAttribute("class", "text-dark");
+                firstnameValueDiv.textContent = re.data[x].firstname;
+                firstnameDiv.appendChild(firstnameValueDiv);
+
+
+                let lastnameDiv = document.createElement("div");
+                lastnameDiv.setAttribute("class", "col-md-6 mb-4");
+                nameDiv.appendChild(lastnameDiv);
+
+                let lastnameLabelDiv = document.createElement("div");
+                lastnameLabelDiv.textContent = "Nachname";
+                lastnameDiv.appendChild(lastnameLabelDiv);
+
+                let lastnameValueDiv = document.createElement("div");
+                lastnameValueDiv.setAttribute("class", "text-dark");
+                lastnameValueDiv.textContent = re.data[x].lastname;
+                lastnameDiv.appendChild(lastnameValueDiv);
+
+
+                let rowTwo = document.createElement("div");
+                rowTwo.setAttribute("class", "row");
+
+                let usernameDiv = document.createElement("div");
+                usernameDiv.setAttribute("class", "col-md-6 mb-4");
+                rowTwo.appendChild(usernameDiv);
+
+                let usernameLabelDiv = document.createElement("div");
+                usernameLabelDiv.textContent = "Benutzername";
+                usernameDiv.appendChild(usernameLabelDiv);
+
+                let usernameValueDiv = document.createElement("div");
+                usernameValueDiv.setAttribute("class", "text-dark");
+                usernameValueDiv.textContent = re.data[x].username;
+                usernameDiv.appendChild(usernameValueDiv);
+
+                let emailDiv = document.createElement("div");
+                emailDiv.setAttribute("class", "col-md-6");
+                rowTwo.appendChild(emailDiv);
+
+                let emailLabelDiv = document.createElement("div");
+                emailLabelDiv.textContent = "E-Mail";
+                emailDiv.appendChild(emailLabelDiv);
+
+                let emailValueDiv = document.createElement("div");
+                emailValueDiv.setAttribute("class", "text-dark");
+                emailValueDiv.textContent = re.data[x].email;
+                emailDiv.appendChild(emailValueDiv);
+
+
+                let subtd_right = document.createElement("td");
+                subtd_right.setAttribute("colspan", 2);
+
+                let h5_right = document.createElement("h5");
+                h5_right.setAttribute("class", "mt-2");
+
+                let hr_right = document.createElement("hr");
+
+                let table = document.createElement("table");
+                table.setAttribute("class", "table table-borderless");
+
+                let trUserRights = document.createElement("tr");
+                trUserRights.setAttribute("class", "users-subtable");
+                trUserRights.innerHTML = `<td>Benutzer</td>
+                                        <td>` + userRights + `</td>`;
+                table.appendChild(trUserRights);
+
+                let trAdRights = document.createElement("tr");
+                trAdRights.setAttribute("class", "users-subtable");
+                trAdRights.innerHTML = `<td>Inserate</td>
+                                        <td>` + adRights + `</td>`;
+                table.appendChild(trAdRights);
+
+                let trAddressRights = document.createElement("tr");
+                trAddressRights.setAttribute("class", "users-subtable");
+                trAddressRights.innerHTML = `<td>Adressen</td>
+                                            <td>` + addressRights + `</td>`;
+                table.appendChild(trAddressRights);
+
+                let trPolicyRights = document.createElement("tr");
+                trPolicyRights.setAttribute("class", "users-subtable");
+                trPolicyRights.innerHTML = `<td>Richtlinien</td>
+                                            <td>` + policyRights + `</td>`;
+                table.appendChild(trPolicyRights);
+
+                let trIpRights = document.createElement("tr");
+                trIpRights.setAttribute("class", "users-subtable");
+                trIpRights.innerHTML = `<td>IP-Adressen</td>
+                                        <td>` + ipRights + `</td>`;
+                table.appendChild(trIpRights);
+
+                let trNewsletterRights = document.createElement("tr");
+                trNewsletterRights.setAttribute("class", "users-subtable");
+                trNewsletterRights.innerHTML = `<td>Newsletter</td>
+                                                <td>` + newsletterRights + `</td>`;
+                table.appendChild(trNewsletterRights);
+
+
+
+                subtd_left.appendChild(h5_left);
+                subtd_left.appendChild(hr_left);
+                subtd_left.appendChild(nameDiv);
+                subtd_left.appendChild(rowTwo);
+
+                subtd_right.appendChild(h5_right);
+                subtd_right.appendChild(hr_right);
+                subtd_right.appendChild(table);
+
+                trCollapsed.appendChild(subtd_left);
+                trCollapsed.appendChild(subtd_right);
 
 
                 userTableBody.appendChild(trClickable);
@@ -514,9 +660,6 @@ function updateUserModalReset() {
     updateNewsletterUsersSwitch.checked = false;
     updateNewsletterUsersSwitch.blur();
 
-    let forbid = updateUserRightsForm.getElementsByClassName("ipt-user-forbid-action")[0];
-    forbid.value = "";
-
     updateUserRightsSubmitBtn.removeAttribute("data-action");
     updateUserRightsSubmitBtn.removeAttribute("data-string");
     updateUserRightsSubmitBtn.disabled = true;
@@ -527,10 +670,9 @@ $("#update-user-modal").on("hidden.bs.modal", function() {
     updateUserModalReset();
 });
 
-function userFetchUpdateValues(e, el, search = undefined) {
+function userFetchUpdateValues(e, uid, search = undefined) {
     e.stopImmediatePropagation();
-    let parent = el.parentElement;
-    let id = parseInt(parent.getElementsByTagName("input")[0].value);
+    let id = parseInt(uid);
 
     if (search !== undefined) {
         updateUserRightsSubmitBtn.dataset.action = "search";
@@ -553,9 +695,6 @@ function userFetchUpdateValues(e, el, search = undefined) {
             });
             return false;
         }
-
-        let forbid = updateUserRightsForm.getElementsByClassName("ipt-user-forbid-action")[0];
-        forbid.value = re.id;
 
         updateUserFirstnameOut.textContent = re.firstname;
         updateUserLastnameOut.textContent = re.lastname;
@@ -616,9 +755,6 @@ function userUpdateRights(e) {
     policyRights = (updateTermsUserSwitch.checked) ? true : false;
     ipRights = (updateIpUsersSwitch.checked) ? true : false;
     newsletterRights = (updateNewsletterUsersSwitch.checked) ? true : false;
-
-    let forbid = updateUserRightsForm.getElementsByClassName("ipt-user-forbid-action")[0].value;
-    let id = parseInt(forbid);
     
     let rawData = {
             user_rights: userRights,
@@ -630,7 +766,7 @@ function userUpdateRights(e) {
     };
 
     let data = {
-        id: parseInt(id),
+        id: parseInt(_current),
         firstname: updateUserFirstnameOut.textContent,
         lastname: updateUserLastnameOut.textContent,
         rights: JSON.stringify(rawData)
@@ -655,7 +791,7 @@ function userUpdateRights(e) {
                 message: re.msg
             });
             if (search === undefined) {
-                pgFetchUserTable(_page.value, id);
+                pgFetchUserTable(_page.value, _current);
             } else {
                 searchUser(e, search);
             }
@@ -691,17 +827,14 @@ const blockUserSubmitBtn = document.getElementById("block-user-submit-btn");
 
 function clearUserBlockModal() {
     blockUserMessage.textContent = "";
-    let forbid = blockUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-    forbid.value = "";
 }
 $(blockUserModal).on("hidden.bs.modal", function() {
     clearUserBlockModal();
 });
 
-function fetchUserBlockValues(e, el, search = undefined) {
+function fetchUserBlockValues(e, uid, search = undefined) {
     e.stopImmediatePropagation();
-    let parent = el.parentElement;
-    let id = parseInt(parent.getElementsByTagName("input")[0].value);
+    let id = parseInt(uid);
 
     if (search !== undefined) {
         blockUserSubmitBtn.dataset.action = "search";
@@ -725,9 +858,6 @@ function fetchUserBlockValues(e, el, search = undefined) {
             return false;
         }
 
-        let forbid = blockUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-        forbid.value = re.id;
-
         blockUserMessage.textContent = "Sollen wirklich alle Rechten von " + re.firstname + " " + re.lastname + " blockiert werden?";
 
         $(blockUserModal).modal("show");
@@ -735,9 +865,6 @@ function fetchUserBlockValues(e, el, search = undefined) {
 }
 
 function userBlockRights() {
-    let forbid = blockUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-    let id = parseInt(forbid.value);
-
     // check if user searched for something
     let search = undefined;
     if (blockUserSubmitBtn.dataset.action && blockUserSubmitBtn.dataset.string) {
@@ -745,7 +872,7 @@ function userBlockRights() {
     }
     
     let data = {
-        id: id
+        id: parseInt(_current)
     }
 
     let x = new xhr();
@@ -790,17 +917,14 @@ const deleteUserSubmitBtn = document.getElementById("delete-user-submit-btn");
 
 function clearUserDeleteModal() {
     deleteUserMessage.textContent = "";
-    let forbid = deleteUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-    forbid.value = "";
 }
 $(deleteUserModal).on("hidden.bs.modal", function() {
     clearUserDeleteModal();
 });
 
-function fetchUserDeleteValues(e, el, search = undefined) {
+function fetchUserDeleteValues(e, uid, search = undefined) {
     e.stopImmediatePropagation();
-    let parent = el.parentElement;
-    let id = parseInt(parent.getElementsByTagName("input")[0].value);
+    let id = parseInt(uid);
 
     if (search !== undefined) {
         deleteUserSubmitBtn.dataset.action = "search";
@@ -824,9 +948,6 @@ function fetchUserDeleteValues(e, el, search = undefined) {
             return false;
         }
 
-        let forbid = deleteUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-        forbid.value = re.id;
-
         deleteUserMessage.textContent = "Soll " + re.firstname + " " + re.lastname + " wirklich in den Papierkorb verschoben werden?";
 
         $(deleteUserModal).modal("show");
@@ -834,16 +955,13 @@ function fetchUserDeleteValues(e, el, search = undefined) {
 }
 
 function userDelete() {
-    let forbid = deleteUserModal.getElementsByClassName("ipt-user-forbid-action")[0];
-    let id = parseInt(forbid.value);
-
     let search = undefined;
     if (deleteUserSubmitBtn.dataset.action && deleteUserSubmitBtn.dataset.string) {
         search = deleteUserSubmitBtn.dataset.string;
     }
 
     let data = {
-        id: id
+        id: parseInt(_current)
     }
 
     let x = new xhr();
@@ -957,17 +1075,72 @@ function searchUser(e, search = undefined) {
                 let trClickable = document.createElement("tr");
                 trClickable.setAttribute("role", "row");
                 trClickable.setAttribute("class", "table-row-clickable");
-                // NOTICE: Changing the last <td> element in this section will cause fatal errors !
-                trClickable.innerHTML = `<td>` + re.data[x].firstname + `</td>
-                                        <td>` + re.data[x].lastname + `</td>
-                                        <td>` + re.data[x].username + `</td>
-                                        <td>` + re.data[x].email + `</td>
-                                        <td class="text-center user-table-action-column">
-                                            <button title="Rechte bearbeiten" class="btn btn-primary btn-sm mr-3" onclick="userFetchUpdateValues(event, this, '` + userSearchIpt.value + `')"><i class="fas fa-user-cog"></i></button>
-                                            <button title="Benutzer sofort blockieren" class="btn btn-warning btn-sm mr-3" onclick="fetchUserBlockValues(event, this, '` + userSearchIpt.value + `')"><i class="fas fa-user-slash"></i></button>
-                                            <button title="Benutzer löschen" class="btn btn-danger btn-sm" onclick="fetchUserDeleteValues(event, this, '` + userSearchIpt.value + `')"><i class="fas fa-trash-alt"></i></button>
-                                            <input type="hidden" value="` + re.data[x].id + `" class="ipt-user-forbid-action" disabled>
-                                        </td>`;
+                // NOTICE: Changing the last <td> element in this section can cause fatal errors !
+                let fntd = document.createElement("td");
+                fntd.textContent = re.data[x].firstname;
+
+                let lntd = document.createElement("td");
+                lntd.textContent = re.data[x].lastname;
+
+                let untd = document.createElement("td");
+                untd.textContent = re.data[x].username;
+
+                let emtd = document.createElement("td");
+                emtd.textContent = re.data[x].email;
+
+                let actiontd = document.createElement("td");
+                actiontd.setAttribute("class", "text-center user-table-action-column");
+
+                let updateBtn = document.createElement("button");
+                updateBtn.setAttribute("title", "Rechte bearbeiten");
+                updateBtn.setAttribute("class", "btn btn-primary btn-sm mr-3");
+
+                let updateIcon = document.createElement("i");
+                updateIcon.setAttribute("class", "fas fa-user-cog");
+                updateBtn.appendChild(updateIcon);
+
+                let blockBtn = document.createElement("button");
+                blockBtn.setAttribute("title", "Benutzer blockieren");
+                blockBtn.setAttribute("class", "btn btn-warning btn-sm mr-3");
+
+                let blockIcon = document.createElement("i");
+                blockIcon.setAttribute("class", "fas fa-user-slash");
+                blockBtn.appendChild(blockIcon);
+
+                let delBtn = document.createElement("button");
+                delBtn.setAttribute("title", "Benutzer löschen");
+                delBtn.setAttribute("class", "btn btn-danger btn-sm");
+
+                let delIcon = document.createElement("i");
+                delIcon.setAttribute("class", "fas fa-trash-alt");
+                delBtn.appendChild(delIcon);
+
+                trClickable.appendChild(fntd);
+                trClickable.appendChild(lntd);
+                trClickable.appendChild(untd);
+                trClickable.appendChild(emtd);
+                trClickable.appendChild(actiontd);
+
+                actiontd.appendChild(updateBtn);
+                actiontd.appendChild(blockBtn);
+                actiontd.appendChild(delBtn);
+
+                let id = re.data[x].id;
+
+                updateBtn.addEventListener("click", function(e) {
+                    userFetchUpdateValues(e, id, userSearchIpt.value);
+                    _current = id;
+                }, false);
+
+                blockBtn.addEventListener("click", function(e) {
+                    fetchUserBlockValues(e, id, userSearchIpt.value);
+                    _current = id;
+                }, false);
+
+                delBtn.addEventListener("click", function(e) {
+                    fetchUserDeleteValues(e, id, userSearchIpt.value);
+                    _current = id;
+                }, false);
                 
                 // assign right icons
                 let userRights, adRights, addressRights, policyRights, ipRights, newsletterRights;
@@ -982,60 +1155,137 @@ function searchUser(e, search = undefined) {
 
                 let trCollapsed = document.createElement("tr");
                 trCollapsed.setAttribute("class", "table-row-collapsed");
-                trCollapsed.innerHTML = `<td colspan="3">
-                                            <h5 class="mt-2">` + re.data[x].firstname + ` ` + re.data[x].lastname + `</h5>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Vorname</div>
-                                                    <div class="text-dark">` + re.data[x].firstname + `</div>
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Nachname</div>
-                                                    <div class="text-dark">` + re.data[x].lastname + `</div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4">
-                                                    <div>Benutzername</div>
-                                                    <div class="text-dark">` + re.data[x].username + `</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div>E-Mail</div>
-                                                    <div class="text-dark">` + re.data[x].email + `</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td colspan="2">
-                                            <h5 class="mt-2">Rechte</h5>
-                                            <hr>
-                                            <table class="table table-borderless">
-                                                <tr class="users-subtable">
-                                                    <td>Benutzer</td>
-                                                    <td>` + userRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Inserate</td>
-                                                    <td>` + adRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Adressen</td>
-                                                    <td>` + addressRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Richtlinien</td>
-                                                    <td>` + policyRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>IP-Adresse</td>
-                                                    <td>` + ipRights + `</td>
-                                                </tr>
-                                                <tr class="users-subtable">
-                                                    <td>Newsletter</td>
-                                                    <td>` + newsletterRights + `</td>
-                                                </tr>
-                                            </table>
-                                        </td>`;
+
+                let subtd_left = document.createElement("td");
+                subtd_left.setAttribute("colspan", 3);
+
+                let h5_left = document.createElement("h5");
+                h5_left.setAttribute("class", "mt-2");
+                h5_left.textContent = re.data[x].firstname + " " + re.data[x].lastname;
+
+                let hr_left = document.createElement("hr");
+
+                let nameDiv = document.createElement("div");
+                nameDiv.setAttribute("class", "row");
+
+                let firstnameDiv = document.createElement("div");
+                firstnameDiv.setAttribute("class", "col-md-6 mb-4");
+                nameDiv.appendChild(firstnameDiv);
+
+                let firstnameLabelDiv = document.createElement("div");
+                firstnameLabelDiv.textContent = "Vorname";
+                firstnameDiv.appendChild(firstnameLabelDiv);
+
+                let firstnameValueDiv = document.createElement("div");
+                firstnameValueDiv.setAttribute("class", "text-dark");
+                firstnameValueDiv.textContent = re.data[x].firstname;
+                firstnameDiv.appendChild(firstnameValueDiv);
+
+
+                let lastnameDiv = document.createElement("div");
+                lastnameDiv.setAttribute("class", "col-md-6 mb-4");
+                nameDiv.appendChild(lastnameDiv);
+
+                let lastnameLabelDiv = document.createElement("div");
+                lastnameLabelDiv.textContent = "Nachname";
+                lastnameDiv.appendChild(lastnameLabelDiv);
+
+                let lastnameValueDiv = document.createElement("div");
+                lastnameValueDiv.setAttribute("class", "text-dark");
+                lastnameValueDiv.textContent = re.data[x].lastname;
+                lastnameDiv.appendChild(lastnameValueDiv);
+
+
+                let rowTwo = document.createElement("div");
+                rowTwo.setAttribute("class", "row");
+
+                let usernameDiv = document.createElement("div");
+                usernameDiv.setAttribute("class", "col-md-6 mb-4");
+                rowTwo.appendChild(usernameDiv);
+
+                let usernameLabelDiv = document.createElement("div");
+                usernameLabelDiv.textContent = "Benutzername";
+                usernameDiv.appendChild(usernameLabelDiv);
+
+                let usernameValueDiv = document.createElement("div");
+                usernameValueDiv.setAttribute("class", "text-dark");
+                usernameValueDiv.textContent = re.data[x].username;
+                usernameDiv.appendChild(usernameValueDiv);
+
+                let emailDiv = document.createElement("div");
+                emailDiv.setAttribute("class", "col-md-6");
+                rowTwo.appendChild(emailDiv);
+
+                let emailLabelDiv = document.createElement("div");
+                emailLabelDiv.textContent = "E-Mail";
+                emailDiv.appendChild(emailLabelDiv);
+
+                let emailValueDiv = document.createElement("div");
+                emailValueDiv.setAttribute("class", "text-dark");
+                emailValueDiv.textContent = re.data[x].email;
+                emailDiv.appendChild(emailValueDiv);
+
+
+                let subtd_right = document.createElement("td");
+                subtd_right.setAttribute("colspan", 2);
+
+                let h5_right = document.createElement("h5");
+                h5_right.setAttribute("class", "mt-2");
+
+                let hr_right = document.createElement("hr");
+
+                let table = document.createElement("table");
+                table.setAttribute("class", "table table-borderless");
+
+                let trUserRights = document.createElement("tr");
+                trUserRights.setAttribute("class", "users-subtable");
+                trUserRights.innerHTML = `<td>Benutzer</td>
+                                        <td>` + userRights + `</td>`;
+                table.appendChild(trUserRights);
+
+                let trAdRights = document.createElement("tr");
+                trAdRights.setAttribute("class", "users-subtable");
+                trAdRights.innerHTML = `<td>Inserate</td>
+                                        <td>` + adRights + `</td>`;
+                table.appendChild(trAdRights);
+
+                let trAddressRights = document.createElement("tr");
+                trAddressRights.setAttribute("class", "users-subtable");
+                trAddressRights.innerHTML = `<td>Adressen</td>
+                                            <td>` + addressRights + `</td>`;
+                table.appendChild(trAddressRights);
+
+                let trPolicyRights = document.createElement("tr");
+                trPolicyRights.setAttribute("class", "users-subtable");
+                trPolicyRights.innerHTML = `<td>Richtlinien</td>
+                                            <td>` + policyRights + `</td>`;
+                table.appendChild(trPolicyRights);
+
+                let trIpRights = document.createElement("tr");
+                trIpRights.setAttribute("class", "users-subtable");
+                trIpRights.innerHTML = `<td>IP-Adressen</td>
+                                        <td>` + ipRights + `</td>`;
+                table.appendChild(trIpRights);
+
+                let trNewsletterRights = document.createElement("tr");
+                trNewsletterRights.setAttribute("class", "users-subtable");
+                trNewsletterRights.innerHTML = `<td>Newsletter</td>
+                                                <td>` + newsletterRights + `</td>`;
+                table.appendChild(trNewsletterRights);
+
+
+
+                subtd_left.appendChild(h5_left);
+                subtd_left.appendChild(hr_left);
+                subtd_left.appendChild(nameDiv);
+                subtd_left.appendChild(rowTwo);
+
+                subtd_right.appendChild(h5_right);
+                subtd_right.appendChild(hr_right);
+                subtd_right.appendChild(table);
+
+                trCollapsed.appendChild(subtd_left);
+                trCollapsed.appendChild(subtd_right);
 
 
                 userTableBody.appendChild(trClickable);
