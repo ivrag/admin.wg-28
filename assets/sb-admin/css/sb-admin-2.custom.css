@@ -2,6 +2,10 @@
     display: none;
 }
 
+#content {
+    z-index: 1 !important;
+}
+
 .sidebar {
     z-index: 1;
 }
