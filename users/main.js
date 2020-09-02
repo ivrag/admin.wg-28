@@ -42,7 +42,7 @@ function warningAlert(obj = {}) {
 
     let slAlert = document.createElement("sl-alert");
     slAlert.setAttribute("type", "warning");
-    slAlert.setAttributeNode("class", "mb-4");
+    slAlert.setAttribute("class", "mb-4");
 
     let slIcon = document.createElement("sl-icon");
     slIcon.setAttribute("slot", "icon");

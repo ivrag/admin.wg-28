@@ -8,6 +8,8 @@
   protected $database = "";
   protected $table = "";
 
+  public $concat = Null;
+
   function __construct($params = []) {
     $this->server = $params['server'] ?? NULL;
     $this->database = $params['database'] ?? NULL;
@@ -164,6 +166,7 @@
   }
 
   function search($str, $cols, $order = Null) {
+    $merge = False;
     $sqlStr = "";
     $max = count($cols)-1;
 
@@ -172,6 +175,23 @@
         $sqlStr .= $cols[$i] . " LIKE :" . $cols[$i] . " OR ";
       } else {
         $sqlStr .= " " . $cols[$i] . " LIKE :" . $cols[$i];
+      }
+    }
+
+    if ($this->concat !== Null) {
+      if (count($this->concat) == 2) {
+        $catMax = count($this->concat)-1;
+        $sqlStr .= " OR CONCAT(" . $this->concat[0] . ", ' ', " . $this->concat[1] . ") LIKE :con";
+        $merge = True;
+      } else {
+        if (count($this->concat) > 2) {
+          echo "DataController search Error: too many concatenation columns";
+          exit();
+        }
+        if (count($this->concat) < 2) {
+          echo "DataController search Error: too few concatenation columns";
+          exit();
+        }
       }
     }
 
@@ -188,12 +208,12 @@
             } else if (strtoupper($orTyp) === "DESC") {
               $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE $sqlStr ORDER BY $orCol DESC");
             } else {
-              echo "Search Error: missing sorting type [asc, desc]";
+              echo "DataController search Error: missing sorting type [asc, desc]";
               return False;
               exit();
             }
           } else {
-            echo "Search Error: missing column";
+            echo "DataController search Error: missing column";
             return False;
             exit();
           }
@@ -202,6 +222,9 @@
       $ned = "%$str%";
       for ($n = 0; $n<count($cols); $n++) {
         $stmt->bindParam(":".$cols[$n], $ned);
+      }
+      if ($merge) {
+        $stmt->bindParam(":con", $ned);
       }
       $stmt->execute();
       $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);

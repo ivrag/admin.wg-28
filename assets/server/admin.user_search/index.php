@@ -16,10 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $db = new DataController($_AdminUsers);
 
             $cols = [
+                "id",
                 "firstname",
                 "lastname",
                 "username",
                 "email"
+            ];
+
+            $db->concat = [
+                "firstname",
+                "lastname"
             ];
 
             $q = $db->search($str, $cols);
