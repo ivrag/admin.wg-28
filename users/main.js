@@ -1,75 +1,3 @@
-// MAIN USER alerts
-const mainWarningAlert = document.getElementById("main-warning-alert");
-const alertSection = document.getElementById("alert-section");
-function successAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let slAlert = document.createElement("sl-alert");
-    slAlert.setAttribute("type", "success");
-    slAlert.setAttribute("class", "mb-4");
-
-    let slIcon = document.createElement("sl-icon");
-    slIcon.setAttribute("slot", "icon");
-    slIcon.setAttribute("name", "check2-circle");
-    
-    let titleSection = document.createElement("div");
-    let strong = document.createElement("strong");
-    strong.textContent = title;
-    titleSection.appendChild(strong);
-
-    let msg = document.createElement("span");
-    msg.textContent = message;
-
-    slAlert.appendChild(slIcon);
-    slAlert.appendChild(titleSection);
-    slAlert.appendChild(msg);
-
-    alertSection.appendChild(slAlert);
-
-    slAlert.show();
-    let showTimeout = setTimeout(function () {
-        slAlert.hide();
-        clearTimeout(showTimeout);
-    }, timeout);
-}
-
-function warningAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let slAlert = document.createElement("sl-alert");
-    slAlert.setAttribute("type", "warning");
-    slAlert.setAttribute("class", "mb-4");
-
-    let slIcon = document.createElement("sl-icon");
-    slIcon.setAttribute("slot", "icon");
-    slIcon.setAttribute("name", "exclamation-triangle");
-
-    let titleSection = document.createElement("div");
-    let strong = document.createElement("strong");
-    strong.textContent = title;
-    titleSection.appendChild(strong);
-
-    let msg = document.createElement("span");
-    msg.textContent = message;
-
-    slAlert.appendChild(slIcon);
-    slAlert.appendChild(titleSection);
-    slAlert.appendChild(msg);
-
-    alertSection.appendChild(slAlert);
-
-    slAlert.show();
-    let showTimeout = setTimeout(function() {
-        slAlert.hide();
-        clearTimeout(showTimeout);
-    }, timeout);
-}
-
-
 let userTableLoaded = false;
 let _page = document.getElementById("main-page-input");
 let _current = false;
@@ -129,8 +57,11 @@ function enableTableClickability() {
     });
 }
 
-// initialize user table
+// initialize
 $(document).ready(function() {
+    // initialize alert messages
+    new userAlertSetup({parent: "alert-section"});
+    // initialize user table
     pgFetchUserTable();
 });
 function pgFetchUserTable(pg, active = undefined) {
@@ -715,9 +646,15 @@ function userFetchUpdateValues(e, uid, search = undefined) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Unbekannter Fehler",
-                message: "Ein unbekannter Fehler ist aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Ein unbekannter Fehler ist aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+            });
+            new userAlert({
+                type: "warning",
+                title: "Unbekannter Fehler",
+                msg: "Ein unbekannter Fehler ist aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -812,9 +749,10 @@ function userUpdateRights(e) {
 
         if (re.status === true) {
             $("#update-user-modal").modal("hide");
-            successAlert({
+            new userAlert({
+                type: "success",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
             if (search === undefined) {
                 pgFetchUserTable(_page.value, _current);
@@ -877,9 +815,10 @@ function fetchUserBlockValues(e, uid, search = undefined) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Unbekannter Fehler",
-                message: "Beim holen der Daten ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Beim holen der Daten ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -907,17 +846,19 @@ function userBlockRights() {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Unbekannter Fehler",
-                message: "Beim versuch die Rechte eines Benutzers zu ändern ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Beim versuch die Rechte eines Benutzers zu ändern ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
 
         if (re.status === true) {
-            successAlert({
+            new userAlert({
+                type: "success",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
             if (search === undefined) {
                 pgFetchUserTable(_page.value);
@@ -925,9 +866,10 @@ function userBlockRights() {
                 searchUser(undefined, search);
             }
         } else {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
         }
     }, data);
@@ -967,9 +909,10 @@ function fetchUserDeleteValues(e, uid, search = undefined) {
         try {
             re = JSON.parse(rsp);
         } catch {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Unbekannter Fehler",
-                message: "Beim holen der Daten ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Beim holen der Daten ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -996,17 +939,19 @@ function userDelete() {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Unbekannter Fehler",
-                message: "Beim versuch einen Benutzer zu löschen ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Beim versuch einen Benutzer zu löschen ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
 
         if (re.status === true) {
-            successAlert({
+            new userAlert({
+                type: "success",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
             if (search === undefined) {
                 pgFetchUserTable(_page.value);
@@ -1014,9 +959,10 @@ function userDelete() {
                 searchUser(undefined, search);
             }
         } else {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
         }
     }, data);
@@ -1087,9 +1033,10 @@ function searchUser(e, search = undefined) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Suche fehlgeschlagen",
-                message: "Ein unbekannter Fehler ist beim suchen der Daten aufgetreten. Versuchen Sie die Daten erneut zu laden, indem Sie die Seite neu laden oder melden Sie sich beim Admin."
+                msg: "Ein unbekannter Fehler ist beim suchen der Daten aufgetreten. Versuchen Sie die Daten erneut zu laden, indem Sie die Seite neu laden oder melden Sie sich beim Admin."
             });
             return false;
         }

@@ -40,6 +40,12 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Shoelace -->
   <link rel="stylesheet" href="../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
+  <!-- alerts -->
+  <link rel="stylesheet" href="../assets/userAlert/userAlert.css">
+
+  <!-- alerts -->
+  <script type="text/javascript" src="../assets/userAlert/userAlert.js"></script>
+
   <!-- Custom -->
   <link rel="stylesheet" href="./style.css">
 

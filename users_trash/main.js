@@ -4,75 +4,6 @@ function initPopovers() {
         $('[data-toggle="popover"]').popover()
     });
 }
-const confirmAlertSection = document.getElementById("confirm-alert-section");
-const alertSection = document.getElementById("alert-section");
-function successAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let slAlert = document.createElement("sl-alert");
-    slAlert.setAttribute("type", "success");
-    slAlert.setAttribute("class", "mb-4");
-
-    let slIcon = document.createElement("sl-icon");
-    slIcon.setAttribute("slot", "icon");
-    slIcon.setAttribute("name", "check2-circle");
-    
-    let titleSection = document.createElement("div");
-    let strong = document.createElement("strong");
-    strong.textContent = title;
-    titleSection.appendChild(strong);
-
-    let msg = document.createElement("span");
-    msg.textContent = message;
-
-    slAlert.appendChild(slIcon);
-    slAlert.appendChild(titleSection);
-    slAlert.appendChild(msg);
-
-    alertSection.appendChild(slAlert);
-
-    slAlert.show();
-    let showTimeout = setTimeout(function () {
-        slAlert.hide();
-        clearTimeout(showTimeout);
-    }, timeout);
-}
-
-function warningAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let slAlert = document.createElement("sl-alert");
-    slAlert.setAttribute("type", "warning");
-    slAlert.setAttributeNode("class", "mb-4");
-
-    let slIcon = document.createElement("sl-icon");
-    slIcon.setAttribute("slot", "icon");
-    slIcon.setAttribute("name", "exclamation-triangle");
-
-    let titleSection = document.createElement("div");
-    let strong = document.createElement("strong");
-    strong.textContent = title;
-    titleSection.appendChild(strong);
-
-    let msg = document.createElement("span");
-    msg.textContent = message;
-
-    slAlert.appendChild(slIcon);
-    slAlert.appendChild(titleSection);
-    slAlert.appendChild(msg);
-
-    alertSection.appendChild(slAlert);
-
-    slAlert.show();
-    let showTimeout = setTimeout(function() {
-        slAlert.hide();
-        clearTimeout(showTimeout);
-    }, timeout);
-}
 
 const mainContentSection = document.getElementById("main-content-section");
 const delUsersTableBody = document.getElementById("del-users-table-body");
@@ -80,6 +11,9 @@ const delUsersTableBody = document.getElementById("del-users-table-body");
 const freeSpaceSection = document.getElementById("free-space-section");
 
 $(document).ready(function() {
+    // initialize alert messages
+    new userAlertSetup({parent: "alert-section"});
+    // initialize deleted users
     initDelUsers();
 });
 
@@ -115,9 +49,10 @@ function fetchFreeSpace() {
             freeSpaceSection.innerHTML = `<button type="button" data-trigger="focus" class="btn btn-info btn-sm" data-toggle="popover" data-html="true" title="Papierkorbkapazität" data-content="Die Papierkorbkapazität dient dazu die Speicherkapazität zu schützen und Daten, die nicht gebraucht werden aus dem Weg zu räumen.<br><br><div><small>` + re.taken + `% belegt</small></div><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated ` + re.class + ` ppwdt' role='progressbar' aria-valuenow=’20’ aria-valuemin='0' aria-valuemax='100'></div></div><div></div>">Papierkorbkapazität</button>`;
             initPopovers();
         } else {
-            successAlert({
+            new userAlert({
+                type: "success",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
         }
     });
@@ -213,9 +148,10 @@ function regenerateUser(n) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Fehler",
-                message: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -298,9 +234,10 @@ function regenerateUser(n) {
             }
             window.scrollTo(0, 0);
         } else {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: re.title,
-                message: re.msg
+                msg: re.msg
             });
         }
     }, data);
@@ -322,9 +259,10 @@ function fetchBanModalValues(n) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Fehler",
-                message: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -376,17 +314,19 @@ function banUser() {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Fehler",
-                message: "Beim Versuch einen Benutzer zu löschen ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Beim Versuch einen Benutzer zu löschen ist ein unbekannter Fehler aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
 
         if (re.status === true) {
-            successAlert({
+            new userAlert({
+                type: "success",
                 title: "Benutzer gelöscht",
-                message: "Der Benutzer wurde erfolgreich gelöscht."
+                msg: "Der Benutzer wurde erfolgreich gelöscht."
             });
             resetBanModal();
             if (banUserModalSubmitBtn.dataset.action && banUserModalSubmitBtn.dataset.string) {
@@ -395,9 +335,10 @@ function banUser() {
                 initDelUsers();
             }
         } else {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Nicht gelöscht",
-                message: "Der Benutzer konnte aus unbekannten Gründen nicht gelöscht werden."
+                msg: "Der Benutzer konnte aus unbekannten Gründen nicht gelöscht werden."
             });
         }
     }, data);
@@ -433,9 +374,10 @@ function fetchSearchedUsers(str) {
         try {
             re = JSON.parse(rsp);
         } catch(err) {
-            warningAlert({
+            new userAlert({
+                type: "warning",
                 title: "Fehler",
-                message: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
+                msg: "Es ist ein unbekannter Fehler beim holen der Daten aufgetreten. Versuchen Sie es erneut oder melden Sie sich beim Admin."
             });
             return false;
         }
@@ -503,9 +445,10 @@ function fetchSearchedUsers(str) {
             if (re.type === "nof") {
                 delUsersTableBody.innerHTML = `<tr><td colspan="6">Keine einträge gefunden ...</td></tr>`;
             } else {
-                warningAlert({
+                new userAlert({
+                    type: "warning",
                     title: re.title,
-                    message: re.msg
+                    msg: re.msg
                 });
             }
         }
