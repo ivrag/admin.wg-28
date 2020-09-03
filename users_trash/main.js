@@ -1,9 +1,8 @@
 // initialize popovers
 function initPopovers() {
     $(function () {
-        $('[data-toggle="popover"]').popover()
-    });
-}
+        $('[data-toggle="popover"]').popover();
+});
 
 const mainContentSection = document.getElementById("main-content-section");
 const delUsersTableBody = document.getElementById("del-users-table-body");

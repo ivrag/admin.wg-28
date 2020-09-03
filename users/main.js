@@ -268,6 +268,7 @@ function pgFetchUserTable(pg, active = undefined) {
                 let h5_right = document.createElement("h5");
                 h5_right.setAttribute("class", "mt-2");
                 h5_right.textContent = "Rechte";
+              
 
                 let hr_right = document.createElement("hr");
 
