@@ -8,13 +8,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.main.css">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
 
   <!-- Shoelace -->
   <link rel="stylesheet" href="./node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
   <!-- Prism -->
-  <link rel="stylesheet" href="./lib/prism/prism.css">
+  <link rel="stylesheet" href="./node_modules/prismjs/themes/prism.css">
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="./assets/css/default/default.styles.css">
@@ -234,7 +234,7 @@ x.post("GET", "myScript.php", rsp => {
   <script type="module" src="./node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.esm.js"></script>
 
   <!-- Prism -->
-  <script type="text/javascript" src="./lib/prism/prism.js"></script>
+  <script type="text/javascript" src="./node_modules/prismjs/prism.js"></script>
 
   <!-- Custom JS -->
   <!--<script type="text/javascript" src="#"></script>-->

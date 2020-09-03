@@ -40,6 +40,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Shoelace -->
   <link rel="stylesheet" href="../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
+  <!-- alerts -->
+  <link rel="stylesheet" href="../assets/userAlert/userAlert.css">
+
   <!-- Custom -->
   <link rel="stylesheet" href="./style.css">
 
@@ -436,6 +439,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
   <!-- xhr -->
   <script type="text/javascript" src="../assets/js/xhr/xhr.min.js"></script>
+
+  <!-- alerts -->
+  <script type="text/javascript" src="../assets/userAlert/userAlert.js"></script>
 
   <!-- Custom -->
   <script type="text/javascript" src="./main.js"></script>

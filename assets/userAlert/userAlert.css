@@ -1,0 +1,9 @@
+.usrAlertParent {
+    position: fixed !important;
+    left: 50px;
+    bottom: 30px;
+    opacity: 0.96;
+    width: 450px;
+    min-width: 300px;
+    z-index: 1060;
+}
