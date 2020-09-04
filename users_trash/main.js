@@ -2,14 +2,15 @@
 function initPopovers() {
     $(function () {
         $('[data-toggle="popover"]').popover();
-});
+    });
+}
 
 const mainContentSection = document.getElementById("main-content-section");
 const delUsersTableBody = document.getElementById("del-users-table-body");
 
 const freeSpaceSection = document.getElementById("free-space-section");
 
-$(document).ready(function() {
+$(document).ready(function () {
     // initialize alert messages
     new userAlertSetup({parent: "alert-section"});
     // initialize deleted users
@@ -116,7 +117,7 @@ function initDelUsers() {
 
                 let id = re[i].id;
 
-                regenBtn.addEventListener("click", function() {
+                regenBtn.addEventListener("click", function () {
                     regenerateUser(id);
                 }, false);
 
