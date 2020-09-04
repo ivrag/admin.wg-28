@@ -10,7 +10,7 @@
     <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.main.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- Custom -->
     <link rel="stylesheet" href="./style.css">
