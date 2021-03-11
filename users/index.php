@@ -24,7 +24,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <meta name="author" content="Immobilien Von Rehetobel AG">
 
   <!-- favicon -->
-  <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="../lib/img/logo/logo-ivr-dark.svg" sizes="any">
 
   <title>Benutzer &bull; admin.wohnung28</title>
 
@@ -220,12 +220,12 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
             <div class="form-row mb-5">
               <div class="col">
                 <label for="new-user-password-input">Passwort *</label>
-                <input id="new-user-password-input" type="password" class="form-control">
+                <input id="new-user-password-input" type="password" class="form-control" autocomplete="off">
                 <small class="form-text">Mindestens 6 Zeichen</small>
               </div>
               <div class="col">
                 <label for="new-user-password-repeat-input">Passwort wiederholen *</label>
-                <input id="new-user-password-repeat-input" type="password" class="form-control">
+                <input id="new-user-password-repeat-input" type="password" class="form-control" autocomplete="off">
                 <small class="form-text">Mindestens 6 Zeichen</small>
               </div>
             </div>

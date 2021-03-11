@@ -16,7 +16,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <meta name="author" content="Immobilien Von Rehetobel AG">
 
   <!-- favicon -->
-  <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="../lib/img/logo/logo-ivr-dark.svg" sizes="any">
 
   <title>Übersicht &bull; admin.wohnung28</title>
 

@@ -55,7 +55,7 @@ const delUsersTableBody = document.getElementById("del-users-table-body");
 
 const freeSpaceSection = document.getElementById("free-space-section");
 
-$(document).ready(function() {
+$(document).ready(() => {
     initDelUsers();
 });
 
@@ -108,6 +108,8 @@ function initDelUsers() {
             re = JSON.parse(rsp);
         } catch(err) {
             delUsersTableBody.innerHTML = `<tr><td colspan="6">Ein unbekannter Fehler ist beim holen der Tabellendaten aufgetreten. Versuchen Sie die Daten erneut zu laden, indem Sie die Seite neu laden oder melden Sie sich beim Admin.</td></tr>`;
+            $(mainContentSection).fadeIn();
+            return false;
         }
 
         delUsersTableBody.innerHTML = "";

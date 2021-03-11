@@ -104,7 +104,7 @@ function enableTableClickability() {
 }
 
 // initialize user table
-$(document).ready(function() {
+$(document).ready(() => {
     pgFetchUserTable();
 });
 function pgFetchUserTable(pg, active = undefined) {
@@ -143,6 +143,7 @@ function pgFetchUserTable(pg, active = undefined) {
             re = JSON.parse(rsp);
         } catch(err) {
             userTableBody.innerHTML = '<tr><td colspan="5">Ein unbekannter Fehler ist beim holen der Tabellendaten aufgetreten. Versuchen Sie die Daten erneut zu laden, indem Sie die Seite neu laden oder melden Sie sich beim Admin.</td></tr>';
+            $(mainContentSection).fadeIn();
             return false;
         }
 

@@ -58,13 +58,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
               ));
             }
           }
-  
-          $rsp = array(
-            "status" => True,
-            "page" => $rawData["page"],
-            "links" => $rawData["links"],
-            "data" => $data
-          );
+          
+          if (intval(count($data)) > 0) {
+            $rsp = array(
+              "status" => True,
+              "page" => $rawData["page"],
+              "links" => $rawData["links"],
+              "data" => $data
+            );
+          } else {
+            $rsp = array(
+              "status" => False
+            );
+          }
         } else {
           $rsp = array(
             "status" => False

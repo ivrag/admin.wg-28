@@ -9,7 +9,7 @@
   <meta name="author" content="Immobilien Von Rehetobel AG">
 
   <!-- favicon -->
-  <link rel="icon" type="image/svg+xml" href="../lib/img/brand/brand-28.svg" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="../lib/img/logo/logo-ivr-dark.svg" sizes="any">
 
   <title>404 &bull; admin.wohnung28</title>
 
