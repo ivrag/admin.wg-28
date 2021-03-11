@@ -151,10 +151,10 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $track["dashboard"] ?>">
   <div class="sidebar-brand-icon">
-    <img id="wg-28-rounded-brand" src="../lib/img/brand/brand-28.svg" width="30rem" alt="Wohnung 28">
+    <img id="wg-28-rounded-brand" src="../lib/img/logo/logo-ivr-dark.svg" width="30rem" alt="Wohnung 28">
   </div>
   <div class="sidebar-brand-text mx-3">
-    <img id="wg-28-brand" src="../lib/img/brand/brand-de.svg" width="145rem" alt="Wohnung 28">
+    <img id="wg-28-brand" src="../lib/img/brand/brand-ivr-dark.svg" width="145rem" alt="Wohnung 28">
   </div>
 </a>
 
