@@ -15,7 +15,7 @@
     <!-- Custom -->
     <link rel="stylesheet" href="./style.css">
 
-    <title>login &bull; admin.wohnung28</title>
+    <title>login &bull; ivrag-admin</title>
 </head>
 <body class="text-center">
     <form id="login-form" class="form-signin">

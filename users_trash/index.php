@@ -26,7 +26,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- favicon -->
   <link rel="icon" type="image/svg+xml" href="../lib/img/logo/logo-ivr-dark.svg" sizes="any">
 
-  <title>Gelöschte Benutzer &bull; admin.wohnung28</title>
+  <title>Gelöschte Benutzer &bull; ivrag-admin</title>
 
   <!-- Custom fonts for this template-->
   <link href="../node_modules/startbootstrap-sb-admin-2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,7 +81,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
           </button>
 
           <div class="mt-2 ml-0">
-            <h1 class="h3 text-gray-800">Benutzer</h1>
+            <h1 class="h3 text-gray-800">Benutzerpapierkorb</h1>
           </div>
 
           <?php require_once ROOT."assets/client/topnav.php" ?>
