@@ -12,6 +12,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   $ip_active = False;
   $advertisement_active = False;
   $newsletter_active = False;
+  $ivr_websites_active = [
+    "home" => False,
+    "projects" => [
+      "wohnung_28" => False
+    ],
+    "about" => False,
+    "contact" => False,
+    "impressum" => False,
+    "privacy" => False
+  ];
 
   if ($page === "dashboard") {
     $dashboard_active = True;
@@ -24,8 +34,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "users") {
     $users_active = True;
 
@@ -37,8 +55,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "./",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "profile") {
     $track = [
       "dashboard" => "../dashboard/",
@@ -48,8 +74,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "users_trash") {
     $user_trash_active = True;
 
@@ -61,8 +95,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "./"
+      "users_trash" => "./",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "addresses") {
     $addresses_active = True;
 
@@ -74,8 +116,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "terms") {
     $terms_active = True;
 
@@ -87,8 +137,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ip") {
     $ip_active = True;
 
@@ -100,8 +158,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "advertisement") {
     $advertisement_active = True;
 
@@ -113,8 +179,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "./",
       "newsletter"  => "../newsletter/",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "newsletter") {
     $newsletter_active = True;
 
@@ -126,10 +200,49 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "advertisement" => "../advertisement/",
       "newsletter"  => "./",
       "users" => "../users/",
-      "users_trash" => "../users_trash/"
+      "users_trash" => "../users_trash/",
+      "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
     ];
+    $logo = "../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../lib/img/brand/brand-ivr-dark.svg";
+  } elseif ($page === "ivr/websites/home") {
+    $ivr_websites_active["home"] = True;
+
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "./",
+      "ivr_websites_wohnung_28" => "#",
+      "ivr_websites_about" => "#",
+      "ivr_websites_contact" => "#",
+      "ivr_websites_impressum" => "#",
+      "ivr_websites_privacy" => "#"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
+  } elseif ($page === "ivr/websites/projects/wohnung_28") {
+
+  } elseif ($page === "ivr/websites/about") {
+
+  } elseif ($page === "ivr/websites/contact") {
+
+  } elseif ($page === "ivr/websites/impressum") {
+
+  } elseif ($page === "ivr/websites/privacy") {
+
   } else {
-    header("Location: /2020/admin.wg-28/404");
+    header("Location: ".ROOT_DIR."404");
   }
 
   require_once ROOT."assets/php/autoload.php";
@@ -151,10 +264,10 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo $track["dashboard"] ?>">
   <div class="sidebar-brand-icon">
-    <img id="wg-28-rounded-brand" src="../lib/img/logo/logo-ivr-dark.svg" width="30rem" alt="Wohnung 28">
+    <img id="wg-28-rounded-brand" src="<?php echo $logo ?>" width="30rem" alt="Wohnung 28">
   </div>
   <div class="sidebar-brand-text mx-3">
-    <img id="wg-28-brand" src="../lib/img/brand/brand-ivr-dark.svg" width="145rem" alt="Wohnung 28">
+    <img id="wg-28-brand" src="<?php echo $brand ?>" width="145rem" alt="Wohnung 28">
   </div>
 </a>
 
@@ -167,6 +280,36 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Übersicht</span></a>
 </li>
+
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Heading -->
+<div class="sidebar-heading">
+  IVR AG
+</div>
+<li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIvrPages" aria-expanded="true" aria-controls="collapseTrash">
+      <i class="fas fa-globe"></i>
+        <span>Webseite</span>
+      </a>
+      <div id="collapseIvrPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item <?php echo ($ivr_websites_active["home"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_home"] ?>">Home</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["projects"]["wohnung_28"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_wohnung_28"] ?>" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Projekte <span class="float-right"><i class="fas fa-caret-down"></i></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Wohnung 28</a>
+          </div>
+          <a class="collapse-item <?php echo ($ivr_websites_active["about"]) ? 'active' : '' ?>" href="#">Über uns</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["contact"]) ? 'active' : '' ?>" href="#">Kontakt</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["impressum"]) ? 'active' : '' ?>" href="#">Impressum</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["privacy"]) ? 'active' : '' ?>" href="#">Datenschutz</a>
+
+        </div>
+      </div>
+  </li>
 
   <?php
 
