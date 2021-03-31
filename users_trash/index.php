@@ -208,6 +208,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Page level plugins -->
   <script src="../node_modules/startbootstrap-sb-admin-2/vendor/chart.js/Chart.min.js"></script>
 
+  <!-- alert -->
+  <script type="text/javascript" src="../assets/js/alert/alert.js"></script>
+
   <!-- xhr -->
   <script type="text/javascript" src="../assets/js/xhr/xhr.min.js"></script>
 
