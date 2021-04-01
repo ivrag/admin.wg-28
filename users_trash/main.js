@@ -5,59 +5,14 @@ function initPopovers() {
     });
 }
 
-const mainSuccessAlert = document.getElementById("main-success-alert");
-const mainWarningAlert = document.getElementById("main-warning-alert");
 const confirmAlertSection = document.getElementById("confirm-alert-section");
-function successAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let titleOut = document.getElementById("main-success-alert-title");
-    let msgOut = document.getElementById("main-success-alert-message");
-
-    titleOut.textContent = title;
-    msgOut.textContent = message;
-
-    mainSuccessAlert.show();
-    let hideTimeout = setTimeout(function() {
-        mainSuccessAlert.hide(function() {
-            titleOut.textContent = "";
-            msgOut.textContent = "";
-        });
-        clearTimeout(hideTimeout);
-    }, timeout);
-}
-
-function warningAlert(obj = {}) {
-    let title = obj.title ?? "Title";
-    let message = obj.message ?? "Your message goes here";
-    let timeout = obj.timeout ?? 5000;
-
-    let titleOut = document.getElementById("main-warning-alert-title");
-    let msgOut = document.getElementById("main-warning-alert-message");
-
-    titleOut.textContent = title;
-    msgOut.textContent = message;
-
-    mainWarningAlert.show();
-    let hideTimeout = setTimeout(function () {
-        mainWarningAlert.hide(function() {
-            titleOut.textContent = "";
-            msgOut.textContent = "";
-        });
-        clearTimeout(hideTimeout);
-    }, timeout);
-}
 
 const mainContentSection = document.getElementById("main-content-section");
 const delUsersTableBody = document.getElementById("del-users-table-body");
 
 const freeSpaceSection = document.getElementById("free-space-section");
 
-$(document).ready(() => {
-    initDelUsers();
-});
+$(initDelUsers());
 
 let delTableLoaded = false;
 

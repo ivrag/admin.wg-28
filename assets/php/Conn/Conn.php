@@ -22,6 +22,14 @@ $_AdminUsers_TRASH = [
   "password" => $_ENV["ADMIN_DB_PWD"]
 ];
 
+$_AdminWebsite = [
+  "server" => $_ENV["ADMIN_SERVER"],
+  "database" => $_ENV["ADMIN_DB"],
+  "table" => $_ENV["ADMIN_WEBSITE_TABLE"],
+  "username" => $_ENV["ADMIN_DB_UN"],
+  "password" => $_ENV["ADMIN_DB_PWD"]
+];
+
 $_Visitors = [
   "server" => $_ENV["ADMIN_VISIT_SERVER"],
   "database" => $_ENV["ADMIN_VISIT_DB"],
