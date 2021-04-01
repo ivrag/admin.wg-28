@@ -1,11 +1,23 @@
 const spinner = document.getElementById("spinner");
 const mainContent = document.getElementById("main-content");
+const cardBody = document.getElementById("main-card-body");
 
 const saveBtn = document.getElementById("save-btn");
 
 let x = new xhr();
 x.get("POST", "./includes/get/", rsp => {
-    let re = JSON.parse(rsp);
+    let re;
+    try {
+        re = JSON.parse(rsp);
+    } catch(err) {
+        warningAlert({
+            title: "#Fehler",
+            message: "Fehler bei der Dateneinlesung"
+        });
+        $(spinner).fadeOut().next($(mainContent).fadeIn());
+        cardBody.innerHTML = "#Fehler";
+        return false;
+    }
     const editor = new EditorJS({
         holder: "editorjs",
         tools: {
@@ -43,11 +55,26 @@ x.get("POST", "./includes/get/", rsp => {
             }
             let x = new xhr();
             x.post("POST", "./includes/save/", rsp => {
-                let re = JSON.parse(rsp);
-                console.log(re);
+                let re;
+                try {
+                    re = JSON.parse(rsp);
+                } catch(err) {
+                    warningAlert({
+                        title: "Speichern fehlgeschlagen",
+                        message: "Die daten konnten nicht gespeichert werden!"
+                    });
+                    return false;
+                }
+                successAlert({
+                    title: "Erfolgreich!",
+                    message: "Die Daten wurden erfolgreich gespeichert!"
+                });
             }, data);
         }).catch((error) => {
-            console.log('Saving failed: ', error);
+            warningAlert({
+                title: "Speichern fehlgeschlagen",
+                message: "Die daten konnten nicht gespeichert werden!"
+            });
         });
     }, false);
 });

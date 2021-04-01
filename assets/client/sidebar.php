@@ -36,11 +36,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -57,11 +57,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "./",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -76,11 +76,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -97,11 +97,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "./",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -118,11 +118,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -139,11 +139,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -160,11 +160,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -181,11 +181,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -202,11 +202,11 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
+      "ivr_websites_about" => "../ivr/websites/about",
+      "ivr_websites_contact" => "../ivr/websites/contact",
+      "ivr_websites_impressum" => "../ivr/websites/impressum",
+      "ivr_websites_privacy" => "../ivr/websites/privacy"
     ];
     $logo = "../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../lib/img/brand/brand-ivr-dark.svg";
@@ -223,24 +223,119 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "./",
-      "ivr_websites_wohnung_28" => "#",
-      "ivr_websites_about" => "#",
-      "ivr_websites_contact" => "#",
-      "ivr_websites_impressum" => "#",
-      "ivr_websites_privacy" => "#"
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "../about",
+      "ivr_websites_contact" => "../contact",
+      "ivr_websites_impressum" => "../impressum",
+      "ivr_websites_privacy" => "../privacy"
     ];
     $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
     $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ivr/websites/projects/wohnung_28") {
+    $ivr_websites_active["projects"]["wohnung_28"] = True;
 
+    $track = [
+      "dashboard" => "../../../../dashboard/",
+      "addresses" => "../../../../addresses/",
+      "terms" => "../../../../terms/",
+      "ip" => "../../../../ip/",
+      "advertisement" => "../../../../advertisement/",
+      "newsletter"  => "../../../../",
+      "users" => "../../../../users/",
+      "users_trash" => "../../../../users_trash/",
+      "ivr_websites_home" => "../../home",
+      "ivr_websites_wohnung_28" => "./",
+      "ivr_websites_about" => "../../about",
+      "ivr_websites_contact" => "../../contact",
+      "ivr_websites_impressum" => "../../impressum",
+      "ivr_websites_privacy" => "../../privacy"
+    ];
+    $logo = "../../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ivr/websites/about") {
+    $ivr_websites_active["about"] = True;
 
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "../home",
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "./",
+      "ivr_websites_contact" => "../contact",
+      "ivr_websites_impressum" => "../impressum",
+      "ivr_websites_privacy" => "../privacy"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ivr/websites/contact") {
+    $ivr_websites_active["contact"] = True;
 
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "../home",
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "../about",
+      "ivr_websites_contact" => "./",
+      "ivr_websites_impressum" => "../impressum",
+      "ivr_websites_privacy" => "../privacy"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ivr/websites/impressum") {
+    $ivr_websites_active["impressum"] = True;
 
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "../home",
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "../about",
+      "ivr_websites_contact" => "../contact",
+      "ivr_websites_impressum" => "./",
+      "ivr_websites_privacy" => "../privacy"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
   } elseif ($page === "ivr/websites/privacy") {
+    $ivr_websites_active["privacy"] = True;
 
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "../home",
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "../about",
+      "ivr_websites_contact" => "../contact",
+      "ivr_websites_impressum" => "./impressum",
+      "ivr_websites_privacy" => "./"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
   } else {
     header("Location: ".ROOT_DIR."404");
   }
@@ -296,16 +391,16 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       <div id="collapseIvrPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item <?php echo ($ivr_websites_active["home"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_home"] ?>">Home</a>
-          <a class="collapse-item <?php echo ($ivr_websites_active["projects"]["wohnung_28"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_wohnung_28"] ?>" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="collapse-item <?php echo ($ivr_websites_active["projects"]["wohnung_28"]) ? 'active' : '' ?>" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Projekte <span class="float-right"><i class="fas fa-caret-down"></i></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Wohnung 28</a>
+            <a class="dropdown-item" href="<?php echo $track["ivr_websites_wohnung_28"] ?>">Wohnung 28</a>
           </div>
-          <a class="collapse-item <?php echo ($ivr_websites_active["about"]) ? 'active' : '' ?>" href="#">Über uns</a>
-          <a class="collapse-item <?php echo ($ivr_websites_active["contact"]) ? 'active' : '' ?>" href="#">Kontakt</a>
-          <a class="collapse-item <?php echo ($ivr_websites_active["impressum"]) ? 'active' : '' ?>" href="#">Impressum</a>
-          <a class="collapse-item <?php echo ($ivr_websites_active["privacy"]) ? 'active' : '' ?>" href="#">Datenschutz</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["about"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_about"] ?>">Über uns</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["contact"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_contact"] ?>">Kontakt</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["impressum"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_impressum"] ?>">Impressum</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["privacy"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_privacy"] ?>">Datenschutz</a>
 
         </div>
       </div>

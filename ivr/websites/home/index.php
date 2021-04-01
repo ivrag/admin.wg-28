@@ -80,7 +80,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
           </button>
 
           <div class="mt-2 ml-0 d-flex">
-            <h1 class="h3 text-gray-800">Home</h1>
+            <h1 class="h3 text-gray-800">Webseite &bull; ivrag.ch</h1>
           </div>
 
           <div id="spinner" class="ml-auto"><div class="spinner-border text-info spinner-border-sm" role="status"><span class="sr-only">Loading...</span></div></div>
@@ -113,7 +113,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                 <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Home</h6>
                 </div>
-                <div class="card-body">
+                <div class="card-body" id="main-card-body">
                   <div id="editorjs"></div>
                   <div class="float-right"><button id="save-btn" class="btn btn-primary"><i class="far fa-save"></i> speichern</button></div>
                 </div>
