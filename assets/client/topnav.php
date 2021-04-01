@@ -5,6 +5,26 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
   $profile_path = "../profile/";
   $logoff_path = "../logoff/";
+
+  if ($page === "ivr/websites/home") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
+  } elseif ($page === "ivr/websites/projects/wohnung_28") {
+    $profile_path = "../../../../profile/";
+    $logoff_path = "../../../../logoff/";
+  } elseif ($page === "ivr/websites/about") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
+  } elseif ($page === "ivr/websites/contact") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
+  } elseif ($page === "ivr/websites/impressum") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
+  } elseif ($page === "ivr/websites/privacy") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
+  }
 ?>
 
 <!-- Topbar Navbar -->
