@@ -112,6 +112,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
               <div class="card shadow mb-4">
                 <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Projekte/Wohnung 28</h6>
+                  <div id="prev-div"><a href="#" class="btn btn-info btn-sm"><i class="far fa-eye"></i> Vorschau</a></div>
                 </div>
                 <div class="card-body" id="main-card-body">
                   <div id="editorjs"></div>

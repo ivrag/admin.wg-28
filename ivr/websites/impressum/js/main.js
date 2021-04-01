@@ -78,7 +78,7 @@ x.get("POST", "./includes/get/", rsp => {
         }).catch((error) => {
             warningAlert({
                 title: "Speichern fehlgeschlagen",
-                message: "Die daten konnten nicht gespeichert werden! error:" + error
+                message: "Die daten konnten nicht gespeichert werden!"
             });
         });
     }, false);
