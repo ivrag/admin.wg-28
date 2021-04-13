@@ -38,7 +38,7 @@ x.get("POST", "./includes/get/", rsp => {
                 class: ImageTool,
                 config: {
                     endpoints: {
-                        byFile: "http://localhost/ivrag-admin/ivr/websites/includes/upload/"
+                        byFile: re.img_url
                     }
                 }
             }
@@ -147,7 +147,7 @@ x.get("POST", "./includes/get/", rsp => {
         onChange: () => {
             $(prevDiv).fadeOut();
         },
-        data: re
+        data: re.contents
     });
     
     saveBtn.addEventListener("click", () => {
@@ -167,11 +167,18 @@ x.get("POST", "./includes/get/", rsp => {
                     });
                     return false;
                 }
-                successAlert({
+                if (re.success === 1) {
+                  successAlert({
                     title: "Erfolgreich!",
                     message: "Die Daten wurden erfolgreich gespeichert!"
-                });
-                $(prevDiv).show();
+                  });
+                  $(prevDiv).show();
+                } else {
+                  warningAlert({
+                    title: "Speichern fehlgeschlagen",
+                    message: "Beim Speichern ist ein unbekannter Fehler aufgetreten..."
+                  });
+                }
             }, data);
         }).catch((error) => {
             warningAlert({

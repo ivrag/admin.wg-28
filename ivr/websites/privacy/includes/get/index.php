@@ -16,6 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $db = new DataController($_AdminWebsite);
-        echo $db->selectId($id)["contents"];
+        echo json_encode(["contents" => json_decode($db->selectId($id)["contents"]), "img_url" => ROOT_DIR . "ivr/websites/includes/upload/"]);
     }
 }
