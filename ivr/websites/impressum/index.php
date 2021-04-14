@@ -175,6 +175,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <script src="../../../node_modules/@editorjs/table/dist/bundle.js"></script>
   <script src="../../../node_modules/@editorjs/marker/dist/bundle.js"></script>
   <script src="../../../node_modules/@editorjs/nested-list/dist/nested-list.js"></script>
+  <script src="../../../node_modules/@editorjs/raw/dist/bundle.js"></script>
 
   <!-- Custom -->
   <script type="text/javascript" src="./js/main.js"></script>

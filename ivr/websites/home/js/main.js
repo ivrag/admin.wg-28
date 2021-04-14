@@ -33,6 +33,7 @@ x.get("POST", "./includes/get/", rsp => {
             },
             underline: Underline,
             table: Table,
+            raw: RawTool,
             marker: Marker,
             list: {
               class: NestedList,

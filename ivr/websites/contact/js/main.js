@@ -28,19 +28,25 @@ x.get("POST", "./includes/get/", rsp => {
                     placeholder: 'Titel hinzufügen',
                     levels: [1, 2, 3, 4, 5],
                     defaultLevel: 2
-                }
+                },
+                inlineToolbar: true
             },
             underline: Underline,
             table: Table,
+            raw: RawTool,
             marker: Marker,
-            list: NestedList,
+            list: {
+              class: NestedList,
+              inlineToolbar: true
+            },
             image: {
                 class: ImageTool,
                 config: {
                     endpoints: {
                         byFile: re.img_url
                     }
-                }
+                },
+                inlineToolbar: true
             }
         },
         i18n: {
