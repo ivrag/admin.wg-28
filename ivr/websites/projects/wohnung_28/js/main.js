@@ -1,4 +1,5 @@
 const spinner = document.getElementById("spinner");
+const loadProg = document.querySelector(".load-progress");
 const mainContent = document.getElementById("main-content");
 const cardBody = document.getElementById("main-card-body");
 
@@ -188,4 +189,12 @@ x.get("POST", "./includes/get/", rsp => {
             });
         });
     }, false);
+}, p => {
+  if (p < 100) {
+    loadProg.style.width = p + "%";
+  } else {
+    $(loadProg).fadeOut(() => {
+      loadProg.style.width = "0%";
+    });
+  }
 });

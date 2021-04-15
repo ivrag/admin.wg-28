@@ -7,7 +7,7 @@ function xhr() {
 		this.xhr.send();
 	}
 
-	this.get = function(method, url, func) {
+	this.get = function(method, url, func, prog = function(){return}) {
 		this.xhr.onload = function() {
 			if (this.status === 200 && this.readyState === 4) {
 				var re = this.responseText;
@@ -16,6 +16,10 @@ function xhr() {
 		}
 
 		this.xhr.open(method.toUpperCase(), url);
+		this.xhr.onprogress = function(e) {
+			let p = e.lengthComputable ? (e.loaded / e.total * 100).toFixed(1) : undefined;
+			prog(p);
+		}
 		this.xhr.send();
 	}
 
@@ -113,7 +117,7 @@ function xhr() {
 
 	this.info = function() {
 		console.info('run(str(method),str(url));');
-		console.info('get(str(method), str(url), callback());');
+		console.info('get(str(method), str(url), callback(rsp)[onload], callback(p)[progress]);');
 		console.info('post(str(method), str(url), callback(), obj(data));');
 		console.info('sendFiles({\n'
 		+ '  url: str(),\n'

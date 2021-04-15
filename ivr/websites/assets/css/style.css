@@ -1,0 +1,16 @@
+#main-content {
+    display: none;
+}
+
+#editorjs {
+    color: #000000;
+}
+
+.load-progress {
+    position: absolute;
+    top: 0;
+    width: 0px;
+    height: 5px;
+    margin: 0;
+    padding: 0;
+}

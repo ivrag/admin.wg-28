@@ -1,4 +1,5 @@
 <?php
+ob_start();
 @session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
@@ -19,3 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo json_encode(["contents" => json_decode($db->selectId($id)["contents"]), "img_url" => ROOT_DIR . "ivr/websites/includes/upload/"]);
     }
 }
+$length = ob_get_length();
+header('Content-Length: '.$length."\r\n");
+ob_end_flush();

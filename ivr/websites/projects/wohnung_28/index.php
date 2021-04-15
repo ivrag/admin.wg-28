@@ -41,7 +41,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <link rel="stylesheet" href="../../../../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
   <!-- Custom -->
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
 
 </head>
 
@@ -89,6 +89,8 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
         </nav>
         <!-- End of Topbar -->
+
+        <div class="load-progress bg-info"></div>
 
         <!-- Begin Page Content -->
         <div class="container-fluid" id="main-content">
