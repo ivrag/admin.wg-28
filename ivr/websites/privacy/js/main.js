@@ -3,7 +3,7 @@ const loadProg = document.querySelector(".load-progress");
 const mainContent = document.getElementById("main-content");
 const cardBody = document.getElementById("main-card-body");
 
-const prevDiv = document.getElementById("prev-div");
+const prevBtn = document.getElementById("prev-btn");
 const saveBtn = document.getElementById("save-btn");
 
 let x = new xhr();
@@ -146,7 +146,7 @@ x.get("POST", "./includes/get/", rsp => {
             $(spinner).fadeOut().next($(mainContent).fadeIn());
         },
         onChange: () => {
-            $(prevDiv).fadeOut();
+            $(prevBtn).fadeOut();
         },
         data: re.contents
     });
@@ -173,7 +173,7 @@ x.get("POST", "./includes/get/", rsp => {
                     title: "Erfolgreich!",
                     message: "Die Daten wurden erfolgreich gespeichert!"
                   });
-                  $(prevDiv).show();
+                  $(prevBtn).show();
                 } else {
                   warningAlert({
                     title: "Speichern fehlgeschlagen",

@@ -9,8 +9,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
   $db = new DataController($_AdminUsers);
   $data = $db->selectId(intval($_SESSION["wg28-user"]["id"]));
-
-  if (intval($data["newsletter_rights"]) === 1) {
 ?>
 
 <!DOCTYPE html>
@@ -100,6 +98,19 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
             <!-- Content Column -->
             <div class="col-lg-12 mb-4">
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Home</h6>
+                </div>
+                <div class="card-body" id="main-card-body">
+                  <div id="editorjs"></div>
+                  <div class="float-right">
+                    <a href="#" id="prev-btn" class="btn btn-info"><i class="far fa-eye"></i> Vorschau</a>
+                    <button id="save-btn" class="btn btn-primary ml-2"><i class="far fa-save"></i> speichern</button>
+                  </div>
+                </div>
+              </div>
               <sl-alert id="main-success-alert" type="success" class="mb-4">
                 <sl-icon slot="icon" name="check2-circle"></sl-icon>
                 <strong id="main-success-alert-title"></strong><br>
@@ -110,17 +121,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                 <strong id="main-warning-alert-title"></strong><br>
                 <span id="main-warning-alert-message"></span>
               </sl-alert>
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Home</h6>
-                  <div id="prev-div"><a href="#" class="btn btn-info btn-sm"><i class="far fa-eye"></i> Vorschau</a></div>
-                </div>
-                <div class="card-body" id="main-card-body">
-                  <div id="editorjs"></div>
-                  <div class="float-right"><button id="save-btn" class="btn btn-primary"><i class="far fa-save"></i> speichern</button></div>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -187,9 +187,6 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 </html>
 
 <?php
-  } else {
-    header("Location: ../../../");
-  }
 } else {
   header("Location: ../../../");
 }

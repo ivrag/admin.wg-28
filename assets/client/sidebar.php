@@ -407,81 +407,71 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   </li>
 
   <?php
-
-  if ($rights["address-rights"] || $rights["policy-rights"] || $rights["ip-rights"]) {
-    echo '<!-- Divider -->
-    <hr class="sidebar-divider">
+  // if ($rights["address-rights"] || $rights["policy-rights"] || $rights["ip-rights"]) {
+  //   echo '<!-- Divider -->
+  //   <hr class="sidebar-divider">
     
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Wohnung 28
-    </div>';
+  //   <!-- Heading -->
+  //   <div class="sidebar-heading">
+  //     Wohnung 28
+  //   </div>';
 
-    if ($rights["address-rights"]) {
-      echo '<li class="nav-item ' . ($addresses_active ? "active" : "") . '">
-      <a class="nav-link" href="' . $track["addresses"] . '">
-      <i class="fas fa-map-marked-alt"></i>
-        <span>Adressen</span></a>
-      </li>';
-    }
-    ?>
+  //   if ($rights["address-rights"]) {
+  //     echo '<li class="nav-item ' . ($addresses_active ? "active" : "") . '">
+  //     <a class="nav-link" href="' . $track["addresses"] . '">
+  //     <i class="fas fa-map-marked-alt"></i>
+  //       <span>Adressen</span></a>
+  //     </li>';
+  //   }
 
-    <?php
-    if ($rights["policy-rights"]) {
-      echo '<li class="nav-item ' . ($terms_active ? "active" : "") . '">
-      <a class="nav-link" href="' . $track["terms"] . '">
-      <i class="fas fa-handshake"></i>
-        <span>Richtlinien</span></a>
-      </li>';
-    }
-  }
-    ?>
+  //   if ($rights["policy-rights"]) {
+  //     echo '<li class="nav-item ' . ($terms_active ? "active" : "") . '">
+  //     <a class="nav-link" href="' . $track["terms"] . '">
+  //     <i class="fas fa-handshake"></i>
+  //       <span>Richtlinien</span></a>
+  //     </li>';
+  //   }
+  // }
 
-    <?php
-    if ($rights["ip-rights"]) {
-      echo '<li class="nav-item ' . ($ip_active ? "active" : "") . '">
-      <a class="nav-link" href="' . $track["ip"] . '">
-      <i class="fas fa-server"></i>
-        <span>IP-Freigabe</span></a>
-      </li>';
-    }
-  ?>
+  // if ($rights["ip-rights"]) {
+  //   echo '<li class="nav-item ' . ($ip_active ? "active" : "") . '">
+  //   <a class="nav-link" href="' . $track["ip"] . '">
+  //   <i class="fas fa-server"></i>
+  //     <span>IP-Freigabe</span></a>
+  //   </li>';
+  // }
 
-
-<?php
-  if ($rights["ad-rights"]) {
-    echo '<!-- Divider -->
-    <hr class="sidebar-divider">
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Inserate
-    </div>
+  // if ($rights["ad-rights"]) {
+  //   echo '<!-- Divider -->
+  //   <hr class="sidebar-divider">
+  //   <!-- Heading -->
+  //   <div class="sidebar-heading">
+  //     Inserate
+  //   </div>
   
-    <li class="nav-item ' . ($advertisement_active ? "active" : "") . '">
-      <a class="nav-link" href="' . $track["advertisement"] . '">
-      <i class="fas fa-file-code"></i>
-        <span>Inserate</span></a>
-      </li>';
-  }
-  ?>
+  //   <li class="nav-item ' . ($advertisement_active ? "active" : "") . '">
+  //     <a class="nav-link" href="' . $track["advertisement"] . '">
+  //     <i class="fas fa-file-code"></i>
+  //       <span>Inserate</span></a>
+  //     </li>';
+  // }
 
-  <?php
-  if ($rights["newsletter-rights"]) {
-    echo '<!-- Divider -->
-    <hr class="sidebar-divider">
+  // if ($rights["newsletter-rights"]) {
+  //   echo '<!-- Divider -->
+  //   <hr class="sidebar-divider">
   
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Newsletter
-    </div>
+  //   <!-- Heading -->
+  //   <div class="sidebar-heading">
+  //     Newsletter
+  //   </div>
   
-    <!-- Nav Item - Newsletter -->
-    <li class="nav-item ' . ($newsletter_active ? "active" : "") . '">
-        <a class="nav-link" href="' . $track["newsletter"] . '">
-        <i class="fas fa-paper-plane"></i>
-        <span>Newsletter</span></a>
-    </li>';
-  }
+  //   <!-- Nav Item - Newsletter -->
+  //   <li class="nav-item ' . ($newsletter_active ? "active" : "") . '">
+  //       <a class="nav-link" href="' . $track["newsletter"] . '">
+  //       <i class="fas fa-paper-plane"></i>
+  //       <span>Newsletter</span></a>
+  //   </li>';
+  // }
 
   if ($rights["user-rights"]) {
     echo '<!-- Divider -->
