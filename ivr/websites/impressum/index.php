@@ -104,7 +104,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                 <div class="card-body" id="main-card-body">
                   <div id="editorjs"></div>
                   <div class="float-right">
-                    <a href="#" id="prev-btn" class="btn btn-info"><i class="far fa-eye"></i> Vorschau</a>
+                    <a href="<?php echo ROOT_DIR . "../impressum" ?>" id="prev-btn" class="btn btn-info" target="_blank" rel="noopener noreferrer"><i class="far fa-eye"></i> Vorschau</a>
                     <button id="save-btn" class="btn btn-primary ml-2"><i class="far fa-save"></i> speichern</button>
                   </div>
                 </div>
