@@ -115,7 +115,10 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                       <small><p><strong>Achtung:</strong> Bei Wörtern mit Umlauten sollte auch die ausgeschriebene Schreibweise beachtet werden. z.B. (Möbel => Moebel, Länder => Laender, usw.)</p></small>
                     </div>
                     <div><input type="text" id="tag-input"></div>
-                    <div class="text-right mt-2"><button id="keywords-save-btn" type="button" class="btn btn-primary"><i class="far fa-save"></i> Keywords speichern</button></div>
+                    <div class="text-right mt-2">
+                      <span id="kwd-msg"></span>
+                      <button id="keywords-save-btn" type="button" class="btn btn-primary ml-2"><i class="far fa-save"></i> Keywords speichern</button>
+                    </div>
                   </div>
                 </div>
               </div>

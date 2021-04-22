@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $dbGET = new DataController($_AdminWebsite);
         $id = NULL;
         foreach ($dbGET->read() as $val) {
-            if ($val["name"] === "contact") {
+            if ($val["name"] === "wohnung_28") {
                 $id = $val["id"];
                 break;
             }

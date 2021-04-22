@@ -6,6 +6,7 @@ const cardBody = document.getElementById("main-card-body");
 const tagInput = document.getElementById("tag-input");
 const kwdSaveBtn = document.getElementById("keywords-save-btn");
 const ty = new Tagify(tagInput);
+const tagMessage = document.getElementById("kwd-msg");
 
 const prevBtn = document.getElementById("prev-btn");
 const saveBtn = document.getElementById("save-btn");
@@ -225,7 +226,28 @@ $(function() {
       keyWordsData: tagInput.value
     }
     x.post("POST", "./includes/savekeywords.php", rsp => {
-      console.log(rsp);
+      let re;
+      try {
+        re = JSON.parse(rsp);
+      } catch(err) {
+        tagMessage.classList.add("text-danger");
+        tagMessage.innerHTML = '<i class="far fa-window-close fa-lg"></i>';
+        return false;
+      }
+      if (re.success === 1) {
+        tagMessage.classList.add("text-success");
+        tagMessage.innerHTML = '<i class="far fa-check-square fa-lg"></i>';
+        $(tagMessage).fadeIn(setTimeout(function() {
+          $(tagMessage).fadeOut(function() {
+            tagMessage.innerHTML = "";
+            tagMessage.classList.remove("text-success");
+          });
+        }, 3000));
+      } else {
+        tagMessage.classList.add("text-danger");
+        tagMessage.innerHTML = '<i class="far fa-window-close fa-lg"></i>';
+        return false;
+      }
     }, data);
   });
 });

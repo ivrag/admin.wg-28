@@ -38,6 +38,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Shoelace -->
   <link rel="stylesheet" href="../../../node_modules/@shoelace-style/shoelace/dist/shoelace/shoelace.css">
 
+  <!-- tagify -->
+  <link rel="stylesheet" href="../../../node_modules/@yaireo/tagify/dist/tagify.css">
+
   <!-- Custom -->
   <link rel="stylesheet" href="../assets/css/style.css">
 
@@ -98,6 +101,28 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
 
             <!-- Content Column -->
             <div class="col-lg-12 mb-4">
+              <div class="card shadow mb-4">
+                <a data-toggle="collapse" href="#keyword-collapse" role="button" aria-expanded="false" aria-controls="keyword-collapse" style="text-decoration: none;">
+                  <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Keywörter für diese Seite</h6>
+                    <div><i class="fas fa-caret-down"></i></div>
+                  </div>
+                </a>
+                <div class="collapse" id="keyword-collapse">
+                  <div class="card-body">
+                    <div class="mb-2">
+                      <p>Zum hinzufügen komma, TAB oder Enter nach dem eingeben des Keywortes betätigen. Zum bearbeiten doppel auf ein Keywort klicken.</p>
+                      <small><p><strong>Achtung:</strong> Bei Wörtern mit Umlauten sollte auch die ausgeschriebene Schreibweise beachtet werden. z.B. (Möbel => Moebel, Länder => Laender, usw.)</p></small>
+                    </div>
+                    <div><input type="text" id="tag-input"></div>
+                    <div class="text-right mt-2">
+                      <span id="kwd-msg"></span>
+                      <button id="keywords-save-btn" type="button" class="btn btn-primary ml-2"><i class="far fa-save"></i> Keywords speichern</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
@@ -153,6 +178,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   <!-- Bootstrap core JavaScript-->
   <script src="../../../node_modules/startbootstrap-sb-admin-2/vendor/jquery/jquery.min.js"></script>
   <script src="../../../node_modules/startbootstrap-sb-admin-2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- tagify -->
+  <script src="../../../node_modules/@yaireo/tagify/dist/tagify.min.js"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="../../../node_modules/startbootstrap-sb-admin-2/vendor/jquery-easing/jquery.easing.min.js"></script>
