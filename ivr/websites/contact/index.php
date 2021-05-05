@@ -129,7 +129,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                   <h6 class="m-0 font-weight-bold text-primary">Kontakt</h6>
                 </div>
                 <div class="card-body" id="main-card-body">
-                  <div id="editorjs"></div>
+                  <?php echo ($_SERVER["SERVER_NAME"] == "localhost") ? '' : '<div id="editorjs"></div>'; // check if user is on localhost ?>
                   <div class="float-right">
                     <a href="<?php echo ROOT_DIR . "../contact" ?>" id="prev-btn" class="btn btn-info" target="_blank" rel="noopener noreferrer"><i class="far fa-eye"></i> Vorschau</a>
                     <button id="save-btn" class="btn btn-primary ml-2"><i class="far fa-save"></i> speichern</button>

@@ -16,7 +16,14 @@ $(function() {
   x.get("POST", "./includes/getcontents.php", rsp => {
       let re;
       try {
+        if (!document.getElementById("editorjs")) {
+          re = null;
+          $(spinner).fadeOut().next($(mainContent).fadeIn());
+          cardBody.innerHTML = '<strong><span class="text-info"># Editor is disabled while on localhost</span></strong>';
+          return false;
+        } else {
           re = JSON.parse(rsp);
+        }
       } catch(err) {
           warningAlert({
               title: "#Fehler",
