@@ -14,6 +14,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   $newsletter_active = False;
   $ivr_websites_active = [
     "home" => False,
+    "offers" => False,
     "projects" => [
       "wohnung_28" => False
     ],
@@ -36,6 +37,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -57,6 +59,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "./",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -76,6 +79,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -97,6 +101,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "./",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -118,6 +123,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -139,6 +145,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -160,6 +167,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -181,6 +189,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -202,6 +211,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../users/",
       "users_trash" => "../users_trash/",
       "ivr_websites_home" => "../ivr/websites/home",
+      "ivr_websites_offers" => "../ivr/websites/offers",
       "ivr_websites_wohnung_28" => "../ivr/websites/projects/wohnung_28",
       "ivr_websites_about" => "../ivr/websites/about",
       "ivr_websites_contact" => "../ivr/websites/contact",
@@ -223,6 +233,29 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "./",
+      "ivr_websites_offers" => "../offers",
+      "ivr_websites_wohnung_28" => "../projects/wohnung_28",
+      "ivr_websites_about" => "../about",
+      "ivr_websites_contact" => "../contact",
+      "ivr_websites_impressum" => "../impressum",
+      "ivr_websites_privacy" => "../privacy"
+    ];
+    $logo = "../../../lib/img/logo/logo-ivr-dark.svg";
+    $brand = "../../../lib/img/brand/brand-ivr-dark.svg";
+  } elseif ($page === "ivr/websites/offers") {
+    $ivr_websites_active["offers"] = True;
+
+    $track = [
+      "dashboard" => "../../../dashboard/",
+      "addresses" => "../../../addresses/",
+      "terms" => "../../../terms/",
+      "ip" => "../../../ip/",
+      "advertisement" => "../../../advertisement/",
+      "newsletter"  => "../../../",
+      "users" => "../../../users/",
+      "users_trash" => "../../../users_trash/",
+      "ivr_websites_home" => "../home",
+      "ivr_websites_offers" => "./",
       "ivr_websites_wohnung_28" => "../projects/wohnung_28",
       "ivr_websites_about" => "../about",
       "ivr_websites_contact" => "../contact",
@@ -244,6 +277,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../../users/",
       "users_trash" => "../../../../users_trash/",
       "ivr_websites_home" => "../../home",
+      "ivr_websites_offers" => "../../offers",
       "ivr_websites_wohnung_28" => "./",
       "ivr_websites_about" => "../../about",
       "ivr_websites_contact" => "../../contact",
@@ -265,6 +299,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "../home",
+      "ivr_websites_offers" => "../offers",
       "ivr_websites_wohnung_28" => "../projects/wohnung_28",
       "ivr_websites_about" => "./",
       "ivr_websites_contact" => "../contact",
@@ -286,6 +321,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "../home",
+      "ivr_websites_offers" => "../offers",
       "ivr_websites_wohnung_28" => "../projects/wohnung_28",
       "ivr_websites_about" => "../about",
       "ivr_websites_contact" => "./",
@@ -307,6 +343,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "../home",
+      "ivr_websites_offers" => "../offers",
       "ivr_websites_wohnung_28" => "../projects/wohnung_28",
       "ivr_websites_about" => "../about",
       "ivr_websites_contact" => "../contact",
@@ -328,6 +365,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       "users" => "../../../users/",
       "users_trash" => "../../../users_trash/",
       "ivr_websites_home" => "../home",
+      "ivr_websites_offers" => "../offers",
       "ivr_websites_wohnung_28" => "../projects/wohnung_28",
       "ivr_websites_about" => "../about",
       "ivr_websites_contact" => "../contact",
@@ -391,6 +429,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
       <div id="collapseIvrPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <a class="collapse-item <?php echo ($ivr_websites_active["home"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_home"] ?>">Home</a>
+          <a class="collapse-item <?php echo ($ivr_websites_active["offers"]) ? 'active' : '' ?>" href="<?php echo $track["ivr_websites_offers"] ?>">Angebote</a>
           <a class="collapse-item <?php echo ($ivr_websites_active["projects"]["wohnung_28"]) ? 'active' : '' ?>" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Projekte <span class="float-right"><i class="fas fa-caret-down"></i></span>
           </a>
