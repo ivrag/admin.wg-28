@@ -9,6 +9,9 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
   if ($page === "ivr/websites/home") {
     $profile_path = "../../../profile/";
     $logoff_path = "../../../logoff/";
+  } elseif ($page === "ivr/websites/offers") {
+    $profile_path = "../../../profile/";
+    $logoff_path = "../../../logoff/";
   } elseif ($page === "ivr/websites/projects/wohnung_28") {
     $profile_path = "../../../../profile/";
     $logoff_path = "../../../../logoff/";
