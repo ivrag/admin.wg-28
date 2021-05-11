@@ -114,10 +114,21 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                       <p>Zum hinzufügen komma, TAB oder Enter nach dem eingeben des Keywortes betätigen. Zum bearbeiten doppel auf ein Keywort klicken.</p>
                       <small><p><strong>Achtung:</strong> Bei Wörtern mit Umlauten sollte auch die ausgeschriebene Schreibweise beachtet werden. z.B. (Möbel => Moebel, Länder => Laender, usw.)</p></small>
                     </div>
-                    <div><input type="text" id="tag-input"></div>
-                    <div class="text-right mt-2">
-                      <span id="kwd-msg"></span>
-                      <button id="keywords-save-btn" type="button" class="btn btn-primary ml-2"><i class="far fa-save"></i> Keywords speichern</button>
+                    <div class="d-inline-block"><button class="btn btn-link" data-toggle="collapse" data-target="#tagview" aria-expanded="true" aria-controls="tagview">tagansicht</button></div>
+                    <div class="d-inline-block ml-2"><button class="btn btn-link" data-toggle="collapse" data-target="#textview" aria-expanded="true" aria-controls="textview">textansicht</button></div>
+                    <div id="viewparent">
+                      <div class="collapse show" id="tagview" data-parent="#viewparent">
+                        <div><input type="text" id="tag-input"></div>
+                        <div class="text-right mt-2">
+                          <span id="kwd-msg"></span>
+                          <button id="keywords-save-btn" type="button" class="btn btn-primary ml-2"><i class="far fa-save"></i> Keywords speichern</button>
+                        </div>
+                      </div>
+                      <div class="collapse" id="textview" data-parent="#viewparent">
+                        <div class="mt-2">
+                          <textarea class="form-control" id="text-tags" rows="12" readonly="true"></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -131,7 +142,7 @@ if (!empty($_SESSION["wg28-user"]) && $_SESSION["auth"] === True) {
                 <div class="card-body" id="main-card-body">
                   <?php echo ($_SERVER["SERVER_NAME"] == "localhost") ? '' : '<div id="editorjs"></div>'; // check if user is on localhost ?>
                   <div class="float-right">
-                    <a href="<?php echo ROOT_DIR . "../privacy" ?>" id="prev-btn" class="btn btn-info" target="_blank" rel="noopener noreferrer"><i class="far fa-eye"></i> Vorschau</a>
+                    <a href="https://ivrag.ch/privacy" id="prev-btn" class="btn btn-info" target="_blank" rel="noopener noreferrer"><i class="far fa-eye"></i> Vorschau</a>
                     <button id="save-btn" class="btn btn-primary ml-2"><i class="far fa-save"></i> speichern</button>
                   </div>
                 </div>

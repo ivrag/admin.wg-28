@@ -207,15 +207,9 @@ $(function() {
               });
           });
       }, false);
-  }, p => {
-    if (p < 100) {
-      loadProg.style.width = p + "%";
-    } else {
-      $(loadProg).fadeOut(() => {
-        loadProg.style.width = "0%";
-      });
-    }
   });
+
+
 
   x = new xhr();
   x.get("POST", "./includes/getkeywords.php", rsp => {
@@ -226,6 +220,15 @@ $(function() {
       console.error("unable to parse keywords!");
     }
     ty.loadOriginalValues(re);
+    let tagStr = "";
+    for (x in re) {
+      if (x < re.length -1) {
+        tagStr += re[x].value + ", ";
+      } else {
+        tagStr += re[x].value;
+      }
+    }
+    $("#text-tags").val(tagStr);
   });
   kwdSaveBtn.addEventListener("click", function() {
     let x = new xhr();
@@ -242,6 +245,7 @@ $(function() {
         return false;
       }
       if (re.success === 1) {
+        updateTextTags();
         tagMessage.classList.add("text-success");
         tagMessage.innerHTML = '<i class="far fa-check-square fa-lg"></i>';
         $(tagMessage).fadeIn(setTimeout(function() {
@@ -258,3 +262,25 @@ $(function() {
     }, data);
   });
 });
+
+function updateTextTags() {
+  let x = new xhr();
+  x.get("POST", "./includes/getkeywords.php", rsp => {
+    let re;
+    try {
+      re = JSON.parse(rsp);
+    } catch(err) {
+      console.error("unable to parse keywords!");
+    }
+    ty.loadOriginalValues(re);
+    let tagStr = "";
+    for (x in re) {
+      if (x < re.length -1) {
+        tagStr += re[x].value + ", ";
+      } else {
+        tagStr += re[x].value;
+      }
+    }
+    $("#text-tags").val(tagStr);
+  });
+}
