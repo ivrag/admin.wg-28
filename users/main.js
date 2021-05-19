@@ -9,6 +9,7 @@ const mainContentSection = document.getElementById("main-content-section");
 const userTableBody = document.getElementById("user-table-body");
 const userTableFooter = document.getElementById("user-table-footer");
 
+// page loading stuff
 let userTableLoadTimeout = setTimeout(() => {
     if (userTableLoaded === false) {
         let tr = document.createElement("tr");
@@ -35,6 +36,7 @@ let userTableLoadTimeout = setTimeout(() => {
     }
 }, 300);
 
+// visible entries per site
 function setDatatests() {
     _page.value = 1;
     dataSets = parseInt(datasetSelect.value);
@@ -57,7 +59,7 @@ function enableTableClickability() {
     });
 }
 
-// initialize user table
+// initialize user table once document is ready
 $(document).ready(() => {
     pgFetchUserTable();
 });
@@ -109,45 +111,46 @@ function pgFetchUserTable(pg, active = undefined) {
                 trClickable.setAttribute("role", "row");
                 (active === parseInt(re.data[x].id)) ? trClickable.setAttribute("class", "table-row-clickable open") : trClickable.setAttribute("class", "table-row-clickable");
                 // NOTICE: Changing the last <td> element in this section can cause fatal errors !
-                let fntd = document.createElement("td");
+                let fntd = document.createElement("td"); // firstname element
                 fntd.textContent = re.data[x].firstname;
 
-                let lntd = document.createElement("td");
+                let lntd = document.createElement("td"); // lastname element
                 lntd.textContent = re.data[x].lastname;
 
-                let untd = document.createElement("td");
+                let untd = document.createElement("td"); // username element
                 untd.textContent = re.data[x].username;
 
-                let emtd = document.createElement("td");
+                let emtd = document.createElement("td"); // email element
                 emtd.textContent = re.data[x].email;
 
-                let actiontd = document.createElement("td");
+                let actiontd = document.createElement("td"); // actions element
                 actiontd.setAttribute("class", "text-center user-table-action-column");
 
-                let updateBtn = document.createElement("button");
+                let updateBtn = document.createElement("button"); // action update button
                 updateBtn.setAttribute("title", "Rechte bearbeiten");
                 updateBtn.setAttribute("class", "btn btn-primary btn-sm mr-3");
 
-                let updateIcon = document.createElement("i");
+                let updateIcon = document.createElement("i"); // update button icon
                 updateIcon.setAttribute("class", "fas fa-user-cog");
                 updateBtn.appendChild(updateIcon);
 
-                let blockBtn = document.createElement("button");
+                let blockBtn = document.createElement("button"); // action block button
                 blockBtn.setAttribute("title", "Benutzer blockieren");
                 blockBtn.setAttribute("class", "btn btn-warning btn-sm mr-3");
 
-                let blockIcon = document.createElement("i");
+                let blockIcon = document.createElement("i"); // block button icon
                 blockIcon.setAttribute("class", "fas fa-user-slash");
                 blockBtn.appendChild(blockIcon);
 
-                let delBtn = document.createElement("button");
+                let delBtn = document.createElement("button"); // action move to trash button
                 delBtn.setAttribute("title", "Benutzer löschen");
                 delBtn.setAttribute("class", "btn btn-danger btn-sm");
 
-                let delIcon = document.createElement("i");
+                let delIcon = document.createElement("i"); // move to trash icon
                 delIcon.setAttribute("class", "fas fa-trash-alt");
                 delBtn.appendChild(delIcon);
 
+                // appending the elements prepared above
                 trClickable.appendChild(fntd);
                 trClickable.appendChild(lntd);
                 trClickable.appendChild(untd);
@@ -160,6 +163,7 @@ function pgFetchUserTable(pg, active = undefined) {
 
                 let id = re.data[x].id;
 
+                // create click handlers for action buttons
                 updateBtn.addEventListener("click", function(e) {
                     userFetchUpdateValues(e, id);
                     _current = id;
@@ -175,7 +179,7 @@ function pgFetchUserTable(pg, active = undefined) {
                     _current = id;
                 }, false);
                 
-                // assign right icons
+                // assign user right icons
                 let userRights, adRights, addressRights, policyRights, ipRights, newsletterRights;
                 let successIcon = '<span class="text-success"><i class="far fa-check-circle"></i></span>';
                 let blockedIcon = '<span class="text-danger"><i class="far fa-times-circle"></i></span>';
@@ -186,129 +190,131 @@ function pgFetchUserTable(pg, active = undefined) {
                 ipRights = (re.data[x].ip_rights) ? successIcon : blockedIcon;
                 newsletterRights = (re.data[x].newsletter_rights) ? successIcon : blockedIcon;
 
+                // collapsed table section
                 let trCollapsed = document.createElement("tr");
                 trCollapsed.setAttribute("class", "table-row-collapsed");
                 if (active === parseInt(re.data[x].id)) { trCollapsed.setAttribute("style", "display: table-row;") };
 
-                let subtd_left = document.createElement("td");
+                let subtd_left = document.createElement("td"); // sub table left hand side
                 subtd_left.setAttribute("colspan", 3);
 
-                let h5_left = document.createElement("h5");
+                let h5_left = document.createElement("h5"); // title element
                 h5_left.setAttribute("class", "mt-2");
                 h5_left.textContent = re.data[x].firstname + " " + re.data[x].lastname;
 
-                let hr_left = document.createElement("hr");
+                let hr_left = document.createElement("hr"); // divider
 
-                let nameDiv = document.createElement("div");
+                let nameDiv = document.createElement("div"); // first-, lastname row
                 nameDiv.setAttribute("class", "row");
 
-                let firstnameDiv = document.createElement("div");
+                let firstnameDiv = document.createElement("div"); // firstname column
                 firstnameDiv.setAttribute("class", "col-md-6 mb-4");
                 nameDiv.appendChild(firstnameDiv);
 
-                let firstnameLabelDiv = document.createElement("div");
+                let firstnameLabelDiv = document.createElement("div"); // firstname label
                 firstnameLabelDiv.textContent = "Vorname";
                 firstnameDiv.appendChild(firstnameLabelDiv);
 
-                let firstnameValueDiv = document.createElement("div");
+                let firstnameValueDiv = document.createElement("div"); // firstname
                 firstnameValueDiv.setAttribute("class", "text-dark");
                 firstnameValueDiv.textContent = re.data[x].firstname;
                 firstnameDiv.appendChild(firstnameValueDiv);
 
 
-                let lastnameDiv = document.createElement("div");
+                let lastnameDiv = document.createElement("div"); // lastname column
                 lastnameDiv.setAttribute("class", "col-md-6 mb-4");
                 nameDiv.appendChild(lastnameDiv);
 
-                let lastnameLabelDiv = document.createElement("div");
+                let lastnameLabelDiv = document.createElement("div"); // lastname label
                 lastnameLabelDiv.textContent = "Nachname";
                 lastnameDiv.appendChild(lastnameLabelDiv);
 
-                let lastnameValueDiv = document.createElement("div");
+                let lastnameValueDiv = document.createElement("div"); // lastname
                 lastnameValueDiv.setAttribute("class", "text-dark");
                 lastnameValueDiv.textContent = re.data[x].lastname;
                 lastnameDiv.appendChild(lastnameValueDiv);
 
 
-                let rowTwo = document.createElement("div");
+                let rowTwo = document.createElement("div"); // 2. row
                 rowTwo.setAttribute("class", "row");
 
-                let usernameDiv = document.createElement("div");
+                let usernameDiv = document.createElement("div"); // username column
                 usernameDiv.setAttribute("class", "col-md-6 mb-4");
                 rowTwo.appendChild(usernameDiv);
 
-                let usernameLabelDiv = document.createElement("div");
+                let usernameLabelDiv = document.createElement("div"); // username label
                 usernameLabelDiv.textContent = "Benutzername";
                 usernameDiv.appendChild(usernameLabelDiv);
 
-                let usernameValueDiv = document.createElement("div");
+                let usernameValueDiv = document.createElement("div"); // username
                 usernameValueDiv.setAttribute("class", "text-dark");
                 usernameValueDiv.textContent = re.data[x].username;
                 usernameDiv.appendChild(usernameValueDiv);
 
-                let emailDiv = document.createElement("div");
+                let emailDiv = document.createElement("div"); // email column
                 emailDiv.setAttribute("class", "col-md-6");
                 rowTwo.appendChild(emailDiv);
 
-                let emailLabelDiv = document.createElement("div");
+                let emailLabelDiv = document.createElement("div"); // email label
                 emailLabelDiv.textContent = "E-Mail";
                 emailDiv.appendChild(emailLabelDiv);
 
-                let emailValueDiv = document.createElement("div");
+                let emailValueDiv = document.createElement("div"); // email
                 emailValueDiv.setAttribute("class", "text-dark");
                 emailValueDiv.textContent = re.data[x].email;
                 emailDiv.appendChild(emailValueDiv);
 
 
-                let subtd_right = document.createElement("td");
+                let subtd_right = document.createElement("td"); // sub table right hand side
                 subtd_right.setAttribute("colspan", 2);
 
-                let h5_right = document.createElement("h5");
+                let h5_right = document.createElement("h5"); // title
+                h5_right.textContent = "Rechte";
                 h5_right.setAttribute("class", "mt-2");
 
-                let hr_right = document.createElement("hr");
+                let hr_right = document.createElement("hr"); // divider
 
-                let table = document.createElement("table");
+                let table = document.createElement("table"); // rights table
                 table.setAttribute("class", "table table-borderless");
 
-                let trUserRights = document.createElement("tr");
+                let trUserRights = document.createElement("tr"); // user rights
                 trUserRights.setAttribute("class", "users-subtable");
                 trUserRights.innerHTML = `<td>Benutzer</td>
                                         <td>` + userRights + `</td>`;
                 table.appendChild(trUserRights);
 
-                let trAdRights = document.createElement("tr");
+                let trAdRights = document.createElement("tr"); // advertisement rights
                 trAdRights.setAttribute("class", "users-subtable");
                 trAdRights.innerHTML = `<td>Inserate</td>
                                         <td>` + adRights + `</td>`;
                 table.appendChild(trAdRights);
 
-                let trAddressRights = document.createElement("tr");
+                let trAddressRights = document.createElement("tr"); // address rights
                 trAddressRights.setAttribute("class", "users-subtable");
                 trAddressRights.innerHTML = `<td>Adressen</td>
                                             <td>` + addressRights + `</td>`;
                 table.appendChild(trAddressRights);
 
-                let trPolicyRights = document.createElement("tr");
+                let trPolicyRights = document.createElement("tr"); // policy rights
                 trPolicyRights.setAttribute("class", "users-subtable");
                 trPolicyRights.innerHTML = `<td>Richtlinien</td>
                                             <td>` + policyRights + `</td>`;
                 table.appendChild(trPolicyRights);
 
-                let trIpRights = document.createElement("tr");
+                let trIpRights = document.createElement("tr"); // ip rights
                 trIpRights.setAttribute("class", "users-subtable");
                 trIpRights.innerHTML = `<td>IP-Adressen</td>
                                         <td>` + ipRights + `</td>`;
                 table.appendChild(trIpRights);
 
-                let trNewsletterRights = document.createElement("tr");
+                let trNewsletterRights = document.createElement("tr"); // newsletter rights
                 trNewsletterRights.setAttribute("class", "users-subtable");
                 trNewsletterRights.innerHTML = `<td>Newsletter</td>
                                                 <td>` + newsletterRights + `</td>`;
                 table.appendChild(trNewsletterRights);
 
 
-
+                // appending the elements prepared above
                 subtd_left.appendChild(h5_left);
                 subtd_left.appendChild(hr_left);
                 subtd_left.appendChild(nameDiv);
@@ -321,11 +327,12 @@ function pgFetchUserTable(pg, active = undefined) {
                 trCollapsed.appendChild(subtd_left);
                 trCollapsed.appendChild(subtd_right);
 
-
+                // appending main contents to the document
                 userTableBody.appendChild(trClickable);
                 userTableBody.appendChild(trCollapsed);
             }
 
+            // pagination
             let trFoot = document.createElement("tr");
 
             if (re.links.previous === false) {
@@ -406,6 +413,7 @@ function pgFetchUserTable(pg, active = undefined) {
               </td>`;
               }
 
+              // appending pagination contents to the document
               userTableFooter.appendChild(trFoot);
 
             // enable link buttons once content is loaded
